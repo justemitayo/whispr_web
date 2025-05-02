@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import './AccounPopup.css'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css'; 
 
@@ -15,11 +16,11 @@ const AccountPopup = ({setLoginPop}:props) => {
       <form className='popup-component'>
         <label>
           <h4>{currState}</h4>
-          <h4 onClick={() => setLoginPop(false)}>x</h4>
+          <h3 onClick={() => setLoginPop(false)}>x</h3>
         </label>
         {
             currState === 'Login' ?
-              <div>
+              <div className='account-input'>
                 <input 
                   type='email'
                   placeholder='whispr@gmail.com'
@@ -32,7 +33,7 @@ const AccountPopup = ({setLoginPop}:props) => {
                 />
               </div>
             :
-              <div>
+              <div className='account-input'>
                 <input
                   type='name'
                   placeholder='Name'
@@ -63,8 +64,8 @@ const AccountPopup = ({setLoginPop}:props) => {
           <p>By continuing, i agree to the terms of use & privacy policy</p>
         </div>
         {currState === 'Login' 
-            ? <p>Create a new account? <span onClick={() => setCurrState('Sign Up')}>Click here</span></p>
-            : <p>Already have an account? <span onClick={() => setCurrState('Login')}>Login here</span></p> 
+            ? <p style={{color:'white'}}>Create a new account? <span onClick={() => setCurrState('Sign Up')}>Click here</span></p>
+            : <p style={{color:'white'}}>Already have an account? <span onClick={() => setCurrState('Login')}>Login here</span></p> 
         }
 
        

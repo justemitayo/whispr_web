@@ -1,0 +1,86 @@
+.account-popup{
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background-color: #00000000;
+  display: grid;
+}
+.popup-component{
+  place-self: center;
+  width: max(20vw, 900px);
+  height: max(14vw, 600px);
+  color: #80808080;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 25px 30px;
+  border-radius: 8px;
+  font-size: 14px;
+  animation: fadeIn 0.5s;
+}
+.popup-component label{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(174, 76, 23);
+}
+.popup-component label h4{
+  font-size: 1.5rem;
+}
+.popup-component label h3{
+  font-size: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: white;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid rgb(174, 76, 23);
+}
+.popup-component label h3:hover {
+  background-color: red;
+}
+.account-input{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.account-input input{
+  margin-bottom: 2rem;
+  outline: none;
+  border: 1px solid rgb(174, 76, 23);
+  padding: 10px;
+  height: 1.7rem;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.account-popup button{
+  border: none;
+  color: black;
+  background-color: rgb(174, 76, 23);
+  width: max(25vw, 200px);
+  padding: 12px 0px;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 3rem;
+  font-size: 1.3rem;
+  /* border: 1px solid rgb(215, 209, 209); */
+  place-self: center;
+} 
+.popup-condition{
+  display: flex;
+  align-items: start;
+  gap: 8px;
+  margin-top: -15px;
+  color: white;
+}
+.popup-condition input{
+  margin-top: 1rem;
+}
+.account-popup span{
+  color: rgb(174, 76, 23);
+  font-weight: 500;
+  cursor: pointer;
+}
