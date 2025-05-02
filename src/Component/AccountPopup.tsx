@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './AccounPopup.css'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css'; 
+import { useGetOTP } from '../Auths/hooks';
+import { toast } from 'react-toastify';
 
 
 interface props{
@@ -10,7 +12,47 @@ interface props{
 const AccountPopup = ({setLoginPop}:props) => {
 
   const[currState, setCurrState] = useState<string>('Login')
-  const [phone, setPhone] = useState<string>('');
+  // const [phone, setPhone] = useState<string>('');
+
+  const [reg, setReg] = useState({
+    user_name: "",
+    email: "",
+    phone_number: "",
+  });
+
+
+  const getOTP = useGetOTP();
+    // console.log(getOTPMutate.isLoading);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setReg({ ...reg, [e.target.name]: e.target.value });
+  };
+
+  const handleContinue = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const payload = {
+      email: reg.email.trim(),
+      user_name: reg.user_name.trim(),
+      phone_number: reg.phone_number.trim(),
+    };
+    if (!payload.email || !payload.phone_number || !payload.user_name) {
+      toast.error('Both fields are required');
+      return;
+    }
+
+    getOTP.mutate(payload, {
+      onSuccess: (data) => {
+        toast.success('OTP sent successfully!');
+        console.log('OTP Success:', data);
+      },
+      onError: (error: any) => {
+        toast.error(`Error: ${error.message || 'Unknown error'}`);
+        console.error('OTP Error:', error);
+      },
+    })
+  }
+
+
   return (
     <div className='account-popup'>
       <form className='popup-component'>
@@ -33,28 +75,36 @@ const AccountPopup = ({setLoginPop}:props) => {
                 />
               </div>
             :
-              <div className='account-input'>
+              <div className='account-input' >
                 <input
                   type='name'
-                  placeholder='Name'
+                  name='user_name'
+                  placeholder='userName'
                   required
+                  value={reg.user_name}
+                  onChange={handleChange}
                 />
                 <input
                   type='email'
+                  name='email'
                   placeholder='whispr@gmail.com'
                   required
+                  value={reg.email}
+                  onChange={handleChange}
                 />
                 <PhoneInput
                   country={'ng'} // default country
-                  value={phone}
-                  onChange={setPhone}
+                  value={reg.phone_number}
+                  onChange={(value: string) =>
+                    setReg((prev) => ({ ...prev, phone_number: value }))
+                  }
                   inputStyle={{ width: '100%' }}
                 />
               </div>
         }
         {
           currState === 'Sign Up' ? (
-            <button>Continue</button>
+            <button onClick={handleContinue} disabled={getOTP.isPending}>{getOTP.isPending ? 'Sending OTP...' : 'Continue'}</button>
             ) : currState === 'Login' ? (
             <button>Login</button>
           ) : null
