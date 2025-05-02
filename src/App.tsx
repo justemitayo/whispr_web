@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import { Routes, Route, BrowserRouter } from 'react-router';
+import { ToastContainer } from 'react-toastify';
+import Navbar from './Component/Navbar';
+import AccountPopup from './Component/AccountPopup';
 
-function App() {
+const App:React.FC = () => {
+
+  const [loginPop, setLoginPop] = useState<boolean>(false)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+       {loginPop ? <AccountPopup setLoginPop={setLoginPop}/> : <></>}
+      <div className="App">
+      <Navbar setLoginPop ={setLoginPop}/>
+        <ToastContainer />
+      </div>
+    </BrowserRouter>
   );
 }
 
