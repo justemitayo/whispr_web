@@ -4,6 +4,8 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css'; 
 import { useGetOTP } from '../Auths/hooks';
 import { toast } from 'react-toastify';
+import Verification from './Verify/Verification';
+// import { useNavigate } from 'react-router-dom';
 
 
 interface props{
@@ -14,6 +16,10 @@ const AccountPopup = ({setLoginPop}:props) => {
   const[currState, setCurrState] = useState<string>('Login')
   // const [phone, setPhone] = useState<string>('');
 
+
+  const [step, setStep] = useState<'signup' | 'otp'>('signup');
+  const [email, setEmail] = useState('');
+
   const [reg, setReg] = useState({
     user_name: "",
     email: "",
@@ -23,7 +29,7 @@ const AccountPopup = ({setLoginPop}:props) => {
 
   const getOTP = useGetOTP();
     // console.log(getOTPMutate.isLoading);
-
+  // const navigate = useNavigate()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setReg({ ...reg, [e.target.name]: e.target.value });
   };
@@ -44,17 +50,24 @@ const AccountPopup = ({setLoginPop}:props) => {
       onSuccess: (data) => {
         toast.success('OTP sent successfully!');
         console.log('OTP Success:', data);
+        localStorage.setItem('pendingUser', JSON.stringify(payload));
+        setEmail(payload.email);
+        setStep('otp');
       },
       onError: (error: any) => {
         toast.error(`Error: ${error.message || 'Unknown error'}`);
         console.error('OTP Error:', error);
       },
     })
+    // if(getOTP.isSuccess){
+    //   navigate('/verify')
+    // }
   }
 
 
   return (
     <div className='account-popup'>
+      {step === 'signup' ? (
       <form className='popup-component'>
         <label>
           <h4>{currState}</h4>
@@ -119,7 +132,12 @@ const AccountPopup = ({setLoginPop}:props) => {
         }
 
        
-      </form>
+      </form> 
+       ) : (
+        // <Verification email={email}/>
+        <p>here i am</p>
+       )
+      } 
     </div>
   )
 }

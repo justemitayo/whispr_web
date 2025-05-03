@@ -5,6 +5,7 @@ import { Routes, Route, BrowserRouter } from 'react-router';
 import { ToastContainer } from 'react-toastify';
 import Navbar from './Component/Navbar';
 import AccountPopup from './Component/AccountPopup';
+import Verification from './Component/Verify/Verification';
 
 const App:React.FC = () => {
 
@@ -13,11 +14,16 @@ const App:React.FC = () => {
     <BrowserRouter>
        {loginPop ? <AccountPopup setLoginPop={setLoginPop}/> : <></>}
       <div className="App">
-      <Navbar setLoginPop ={setLoginPop}/>
+      <Navbar setLoginPop ={setLoginPop}/>\
+      <Verification email=''/>
+      <Routes>
+        <Route path=''  />
+      </Routes>
         <ToastContainer />
       </div>
     </BrowserRouter>
   );
 }
+
 
 export default App;
