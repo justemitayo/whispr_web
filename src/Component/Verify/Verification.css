@@ -1,0 +1,32 @@
+.verify{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 7rem 4rem 7rem;
+}
+.verify h4{
+  color: rgb(174, 76, 23);
+  font-size: 1.5rem;
+}
+.verify input{
+  width: 4rem;
+  height: 4rem;
+  font-size: 2.5rem;
+  margin: 1.5rem;
+  color: rgb(174, 76, 23);
+  text-align: center;
+}
+.verify button{
+  border: none;
+  color: black;
+  background-color: rgb(174, 76, 23);
+  width: max(25vw, 200px);
+  padding: 12px 0px;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 3rem;
+  font-size: 1.3rem;
+  /* border: 1px solid rgb(215, 209, 209); */
+  place-self: center;
+}

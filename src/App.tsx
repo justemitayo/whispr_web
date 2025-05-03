@@ -14,11 +14,11 @@ const App:React.FC = () => {
     <BrowserRouter>
        {loginPop ? <AccountPopup setLoginPop={setLoginPop}/> : <></>}
       <div className="App">
-      <Navbar setLoginPop ={setLoginPop}/>\
+      <Navbar setLoginPop ={setLoginPop}/>
       <Verification email=''/>
-      <Routes>
+      {/* <Routes>
         <Route path=''  />
-      </Routes>
+      </Routes> */}
         <ToastContainer />
       </div>
     </BrowserRouter>

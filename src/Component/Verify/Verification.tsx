@@ -2,12 +2,14 @@ import React,{useRef, useState} from 'react'
 import { useVerifyOTP } from '../../Auths/hooks'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
+import './Verification.css'
 
 interface props{
   email: string
 }
 const Verification = ({email}: props) => {
   const [otp, setOtp] = useState<string[]>(Array(4).fill(''));
+  const [activeIndex, setActiveIndex] = useState<number>(0)
   const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
 
   const navigate =useNavigate()
@@ -15,7 +17,7 @@ const Verification = ({email}: props) => {
   const verifyOTP = useVerifyOTP();
 
     const handleChange = (value: string, index: number) => {
-    if (!/^\d?$/.test(value)) return;
+    if (!/^\d?$/.test(value) || index !== activeIndex) return;
     // ensures that only a single digit (0–9) is allowed. It ignores anything else.
 
     const newOtp = [...otp];
@@ -23,6 +25,7 @@ const Verification = ({email}: props) => {
     setOtp(newOtp);
 
     if (value && index < otp.length - 1) {
+      setActiveIndex(index + 1);
       inputsRef.current[index + 1]?.focus(); 
       //  shifts the cursor to the next input field.
     }
@@ -30,6 +33,7 @@ const Verification = ({email}: props) => {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
     if (e.key === 'Backspace' && !otp[index] && index > 0) {
+      setActiveIndex(index - 1);
       inputsRef.current[index - 1]?.focus();
       // Checks if the pressed key is 'Backspace'.
       // If the current field is empty and it's not the first field, move focus back to the previous field.
@@ -65,7 +69,7 @@ const Verification = ({email}: props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='verify'>
       <h4>Enter the 4- digits code sent to {email}</h4>
       <div>
       {otp.map((digit, idx) => (

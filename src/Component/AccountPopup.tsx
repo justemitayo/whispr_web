@@ -134,8 +134,7 @@ const AccountPopup = ({setLoginPop}:props) => {
        
       </form> 
        ) : (
-        // <Verification email={email}/>
-        <p>here i am</p>
+        <Verification email={email}/>
        )
       } 
     </div>
