@@ -1,5 +1,5 @@
-import React,{useRef, useState} from 'react'
-import { useVerifyOTP } from '../../Auths/hooks'
+import React,{useRef, useState, useEffect} from 'react'
+import { useGetOTP, useVerifyOTP } from '../../Auths/hooks'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
 import './Verification.css'
@@ -11,10 +11,27 @@ const Verification = ({email}: props) => {
   const [otp, setOtp] = useState<string[]>(Array(4).fill(''));
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
+  const [resendTimer, setResendTimer] = useState(60);
 
   const navigate =useNavigate()
 
   const verifyOTP = useVerifyOTP();
+  const getOTP = useGetOTP();
+
+  useEffect(() => {
+    if (resendTimer <= 0) return;
+    const interval = setInterval(() => {
+      setResendTimer((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [resendTimer]);
+//   It starts a countdown from the current resendTimer value (typically 60 seconds).
+// Every second (1000ms), it decrements the timer by 1.
+
+  useEffect(() => {
+    inputsRef.current[activeIndex]?.focus();
+    // Whenever activeIndex changes (e.g., after typing or backspacing), this effect runs.
+  }, [activeIndex]);
 
     const handleChange = (value: string, index: number) => {
     if (!/^\d?$/.test(value) || index !== activeIndex) return;
@@ -40,7 +57,7 @@ const Verification = ({email}: props) => {
     }
   };
 
-    const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const token = otp.join('');
 
@@ -67,6 +84,27 @@ const Verification = ({email}: props) => {
       }
     );
   };
+  const handleResend = () => {
+    const pendingUser = JSON.parse(localStorage.getItem('pendingUser') || '{}');
+
+    if (!pendingUser?.email || !pendingUser?.user_name || !pendingUser?.phone_number) {
+      toast.error('Missing user information. Please sign up again.');
+      return;
+    }
+
+    getOTP.mutate(pendingUser, {
+      onSuccess: () => {
+        toast.success('OTP resent!');
+        setOtp(Array(4).fill(''));
+        setActiveIndex(0);
+        setResendTimer(60);
+      },
+      onError: (error: any) => {
+        toast.error(error.message || 'Failed to resend OTP');
+      },
+    });
+  };
+
 
   return (
     <form onSubmit={handleSubmit} className='verify'>
@@ -88,11 +126,24 @@ const Verification = ({email}: props) => {
       ))}
       </div>
       <button
+        className='verify-button'
         type="submit"
         disabled={verifyOTP.isPending}
       >
         {verifyOTP.isPending ? 'Verifying...' : 'Verify OTP'}
       </button>
+      <p>
+        Didn’t get the code?{''}
+        <button
+        className='very'
+          type="button"
+          onClick={handleResend}
+          disabled={resendTimer > 0 || getOTP.isPending}
+          // style={{ textDecoration: 'underline', background: 'none', border: 'none', color: 'blue', cursor: 'pointer' }}
+        >
+          {resendTimer > 0 ? `Resend in ${resendTimer}s` : 'Resend OTP'}
+        </button>
+      </p>
     </form>
   )
 }

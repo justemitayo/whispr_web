@@ -1,6 +1,6 @@
 import { useMutation, UseMutationResult} from "@tanstack/react-query";
-import { getOTP, verifyOTP } from "./api";
-import { GetOTPRequest, GetOTPResponse, VerifyOTPRequest, VerifyOTPResponse } from "./types";
+import { getOTP, registerUser, verifyOTP } from "./api";
+import { GetOTPRequest, GetOTPResponse, VerifyOTPRequest, VerifyOTPResponse, RegisterUserRequest, AuthResponse } from "./types";
 
 
 export const useGetOTP = (): UseMutationResult<GetOTPResponse, Error, GetOTPRequest> => {
@@ -12,5 +12,10 @@ export const useGetOTP = (): UseMutationResult<GetOTPResponse, Error, GetOTPRequ
 export const useVerifyOTP = (): UseMutationResult<VerifyOTPResponse, Error, VerifyOTPRequest> => {
   return useMutation<VerifyOTPResponse, Error, VerifyOTPRequest>({
     mutationFn: verifyOTP
+  })
+}
+export const useRegisterUser = (): UseMutationResult<AuthResponse, Error, RegisterUserRequest> => {
+  return useMutation<AuthResponse, Error, RegisterUserRequest> ({
+    mutationFn: registerUser
   })
 }
