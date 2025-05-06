@@ -57,8 +57,8 @@ const Registration = () => {
       toast.error('Email format is invalid.');
     }
   
-    if (!password || password.length < 6) {
-      toast.error('Password must be at least 6 characters.');
+    if (!password || password.length < 8) {
+      toast.error('Password must be at least 8 characters.');
     }
   
     if (!confirm_password) {
@@ -108,62 +108,70 @@ const Registration = () => {
         toast.success('Registration successful!');
         localStorage.setItem('RegisteredUser', JSON.stringify(payload));
 
-        if (response.data?.token) {
-          localStorage.setItem('token', response.data.token);
-        }
+        // if (response.data?.token) {
+        //   localStorage.setItem('token', response.data.token);
+        // }
 
 
         localStorage.removeItem('pendingUser')
       },
       onError: (error: any) => {
         toast.error(error.message || 'Registration Failed');
+        console.log('iamaboy')
       },
     })
 
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" accept="image/*" onChange={profileChange} />
-      {preview && <img src={preview} alt="Preview"  />}
+    <form onSubmit={handleSubmit} className='register'>
+      <div className='register-picture'>
+        <input type="file" accept="image/*" onChange={profileChange} />
+        {preview && <img src={preview} alt="Preview"  />}
+      </div>
 
-      <>
-      <div>
+
+      <div className='register-component'>
+      <div className='register-content'>
         <label>UserName:</label>
         <input
           name='user_name'
           type='text'
           value={regUser.user_name}
           onChange={handleInputChange}
+          required
         /> 
       </div>
-      <div>
+      <div className='register-content'>
         <label>Full-Name:</label>
         <input
           name='full_name'
           type='text'
           value={regUser.full_name}
           onChange={handleInputChange}
+          required
         /> 
       </div>
-      <div>
+      <div className='register-content'>
         <label>PassWord:</label>
         <input
           name='password'
           type='password'
           value={regUser.password}
           onChange={handleInputChange}
+          required
         /> 
       </div>
-      <div>
+      <div className='register-content'>
         <label>Confirm PassWord:</label>
         <input
           name='confirm_password'
           type='password'
           value={regUser.confirm_password}
           onChange={handleInputChange}
+          required
         /> 
       </div>
-      <div>
+      <div className='register-content'>
         <label>Bio:</label>
         <textarea 
           name='bio'
@@ -172,7 +180,7 @@ const Registration = () => {
           onChange={handleInputChange}
         /> 
       </div>
-      <div>
+      <div className='register-content'>
         <label>Phone Number:</label>
         <input
           name='phone_number'
@@ -180,9 +188,10 @@ const Registration = () => {
           placeholder='phone Number'
           value={regUser.phone_number}
           onChange={handleInputChange}
+          required
         /> 
       </div>
-      <div>
+      <div className='register-content'>
         <label>Email:</label>
         <input 
           name='email'
@@ -190,13 +199,14 @@ const Registration = () => {
           placeholder='whispr@gmail.com'
           value={regUser.email}
           onChange={handleInputChange}
+          required
         /> 
       </div>
-      </>
+   
       <button type="submit" disabled={registerUser.isPending}>
         {registerUser.isPending ? 'loading...' : 'Register'}
       </button>
-
+      </div>
     </form>
   )
 }

@@ -1,3 +1,64 @@
+.register{
+  display: flex;
+  padding: 5rem 7rem 7rem 4rem;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+.register-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 1.5rem;
+}
+
 label{
-  color: white;
+  color: rgb(174, 76, 23);
+  font-size: 1.4rem;
+  font-style: oblique;
+  margin-bottom: 0.5rem;
+}
+.register-content input{
+  width: max(25vw, 250px);
+  padding: 10px;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  height: 2.5rem;
+  font-size: 1.2rem;
+}
+.register-picture{
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: flex-end; */
+  background-color: white;
+  width: max(25vw, 150px);
+  height: max(25vw, 150px);
+  /* place-content: center; */
+  border-radius: 50%;
+}
+.register-picture img{
+  width: max(25vw, 150px);
+  height: max(25vw, 150px);
+  /* place-content: center; */
+  border-radius: 50%;
+  position: absolute; 
+}
+.register-component button{
+  border: none;
+  color: black;
+  background-color: rgb(174, 76, 23);
+  width: max(25vw, 200px);
+  padding: 12px 0px;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 3rem;
+  font-size: 1.3rem;
+  margin-top: 2rem;
+  /* border: 1px solid rgb(215, 209, 209); */
+  place-self: center;
+}
+textarea{
+  width: max(26vw, 250px);
+  height: 7rem;
+  font-size: 1.2rem;
+  border-radius: 0.3rem;
 }
