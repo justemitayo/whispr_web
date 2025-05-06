@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import Navbar from './Component/Navbar';
 import AccountPopup from './Component/AccountPopup';
 import Verification from './Component/Verify/Verification';
+import Registration from './Component/Verify/Registration';
 
 const App:React.FC = () => {
 
@@ -15,10 +16,11 @@ const App:React.FC = () => {
        {loginPop ? <AccountPopup setLoginPop={setLoginPop}/> : <></>}
       <div className="App">
       <Navbar setLoginPop ={setLoginPop}/>
-      <Verification email=''/>
-      {/* <Routes>
-        <Route path=''  />
-      </Routes> */}
+      {/* <Verification email=''/> */}
+      <Registration />
+      <Routes>
+        {/* <Route path='/register-user' element={<Registration />} /> */}
+      </Routes>
         <ToastContainer />
       </div>
     </BrowserRouter>
