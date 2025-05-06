@@ -1,3 +1,8 @@
+export interface LoginUserRequest {
+  email: string;
+  password: string;
+}
+
 export interface GetOTPRequest {
   email: string;
   phone_number: string;

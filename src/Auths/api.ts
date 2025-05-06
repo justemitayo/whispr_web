@@ -1,6 +1,12 @@
 import instance from "../Configs/Api";
-import { GetOTPRequest, GetOTPResponse, VerifyOTPRequest, VerifyOTPResponse, RegisterUserRequest, AuthResponse} from "./types";
+import { GetOTPRequest, GetOTPResponse, VerifyOTPRequest, VerifyOTPResponse, RegisterUserRequest, AuthResponse, LoginUserRequest} from "./types";
 
+export async function loginUser(
+  payload: LoginUserRequest,
+): Promise<AuthResponse> {
+  const response = await instance.post('/auth/login', payload);
+  return response.data;
+}
 
 export async function getOTP(payload: GetOTPRequest): Promise<GetOTPResponse> {
   const response = await instance.post('/auth/get_code', payload);

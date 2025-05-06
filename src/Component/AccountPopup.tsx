@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import './AccounPopup.css'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css'; 
-import { useGetOTP } from '../Auths/hooks';
+import { useGetOTP, useLoginUser } from '../Auths/hooks';
 import { toast } from 'react-toastify';
 import Verification from './Verify/Verification';
+import { saveString } from '../Configs/Storage';
+import { strings } from '../Configs/Strings';
 // import { useNavigate } from 'react-router-dom';
 
 
@@ -24,15 +26,52 @@ const AccountPopup = ({setLoginPop}:props) => {
     user_name: "",
     email: "",
     phone_number: "",
+     password: ''
   });
+
+  const [log, setLog] = useState({
+    email: "",
+    password: ''
+  })
+
 
 
   const getOTP = useGetOTP();
+  const loginUser = useLoginUser();
     // console.log(getOTPMutate.isLoading);
   // const navigate = useNavigate()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setReg({ ...reg, [e.target.name]: e.target.value });
   };
+
+  const handleLog =  async( e: React.FormEvent) => {
+    e.preventDefault();
+    const payload  ={
+      email: log.email.trim(),
+      password: log.password.trim()
+    }
+    if (payload.email || payload.password) {
+      toast.error('Both fields are required');
+      return;
+    }
+
+    loginUser.mutate(payload, {
+      onSuccess: async(res) => {
+        if(res.data?.token){
+          await saveString(strings.userToken, res.data.token);
+          toast.success('User logged in successfully')
+          setLog({
+            email: '',
+            password: ''
+          })
+        }
+      },
+      onError: (error: any) => {
+        toast.error(`Error: ${error.message || 'Unknown error'}`);
+        console.error('OTP Error:', error);
+      },
+    })
+  }
 
   const handleContinue = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,11 +119,15 @@ const AccountPopup = ({setLoginPop}:props) => {
                   type='email'
                   placeholder='whispr@gmail.com'
                   required
+                  value={reg.email}
+                  onChange={handleChange}
                 />
                 <input
                   type='password'
                   placeholder='Enter your passkey'
                   required
+                  value={reg.password}
+                  onChange={handleChange}
                 />
               </div>
             :
@@ -119,7 +162,7 @@ const AccountPopup = ({setLoginPop}:props) => {
           currState === 'Sign Up' ? (
             <button onClick={handleContinue} disabled={getOTP.isPending}>{getOTP.isPending ? 'Sending OTP...' : 'Continue'}</button>
             ) : currState === 'Login' ? (
-            <button>Login</button>
+            <button disabled={loginUser.isPending} onClick={handleLog}>Login</button>
           ) : null
         }
         <div className='popup-condition'>
