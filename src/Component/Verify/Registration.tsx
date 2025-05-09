@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './Registration.css'
 import { toast } from 'react-toastify';
 import { useRegisterUser } from '../../Auths/hooks';
+import { saveString } from '../../Configs/Storage';
+import { strings } from '../../Configs/Strings';
 
 const Registration = () => {
   const [profilePicture, setProfilePicture] = useState<File | null>(null);
@@ -104,16 +106,14 @@ const Registration = () => {
     }
 
     registerUser.mutate(payload, {
-      onSuccess: (response) => {
+      onSuccess: async(response) => {
+        if (response.data?.token) {
+        await saveString(strings.userToken, response.data.token);
         toast.success('Registration successful!');
-        localStorage.setItem('RegisteredUser', JSON.stringify(payload));
-
+        }
         // if (response.data?.token) {
         //   localStorage.setItem('token', response.data.token);
         // }
-
-
-        localStorage.removeItem('pendingUser')
       },
       onError: (error: any) => {
         toast.error(error.message || 'Registration Failed');

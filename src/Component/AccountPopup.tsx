@@ -50,7 +50,7 @@ const AccountPopup = ({setLoginPop}:props) => {
       email: log.email.trim(),
       password: log.password.trim()
     }
-    if (payload.email || payload.password) {
+    if (!payload.email || !payload.password) {
       toast.error('Both fields are required');
       return;
     }
@@ -86,12 +86,12 @@ const AccountPopup = ({setLoginPop}:props) => {
     }
 
     getOTP.mutate(payload, {
-      onSuccess: (data) => {
-        toast.success('OTP sent successfully!');
-        console.log('OTP Success:', data);
-        localStorage.setItem('pendingUser', JSON.stringify(payload));
-        setEmail(payload.email);
-        setStep('otp');
+      onSuccess: async(res) => {
+        if(res.data){
+          toast.success('OTP sent successfully!')
+          setEmail(payload.email);
+          setStep('otp');
+        }
       },
       onError: (error: any) => {
         toast.error(`Error: ${error.message || 'Unknown error'}`);
@@ -117,6 +117,7 @@ const AccountPopup = ({setLoginPop}:props) => {
               <div className='account-input'>
                 <input 
                   type='email'
+                  name='email'
                   placeholder='whispr@gmail.com'
                   required
                   value={reg.email}
@@ -124,6 +125,7 @@ const AccountPopup = ({setLoginPop}:props) => {
                 />
                 <input
                   type='password'
+                  name='password'
                   placeholder='Enter your passkey'
                   required
                   value={reg.password}
@@ -162,7 +164,7 @@ const AccountPopup = ({setLoginPop}:props) => {
           currState === 'Sign Up' ? (
             <button onClick={handleContinue} disabled={getOTP.isPending}>{getOTP.isPending ? 'Sending OTP...' : 'Continue'}</button>
             ) : currState === 'Login' ? (
-            <button disabled={loginUser.isPending} onClick={handleLog}>Login</button>
+            <button disabled={loginUser.isPending} onClick={handleLog}>{loginUser.isPending ? 'Loading...' : 'Login'}</button>
           ) : null
         }
         <div className='popup-condition'>
