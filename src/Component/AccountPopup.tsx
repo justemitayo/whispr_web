@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import Verification from './Verify/Verification';
 import { saveString } from '../Configs/Storage';
 import { strings } from '../Configs/Strings';
+import { useAuthStore } from '../store/auth.store';
 // import { useNavigate } from 'react-router-dom';
 
 
@@ -34,7 +35,7 @@ const AccountPopup = ({setLoginPop}:props) => {
     password: ''
   })
 
-
+  const updateAuth = useAuthStore().updateAuth;
 
   const getOTP = useGetOTP();
   const loginUser = useLoginUser();
@@ -59,6 +60,7 @@ const AccountPopup = ({setLoginPop}:props) => {
       onSuccess: async(res) => {
         if(res.data?.token){
           await saveString(strings.userToken, res.data.token);
+          updateAuth(res.data)
           toast.success('User logged in successfully')
           setLog({
             email: '',

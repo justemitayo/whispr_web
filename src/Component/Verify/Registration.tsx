@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { useRegisterUser } from '../../Auths/hooks';
 import { saveString } from '../../Configs/Storage';
 import { strings } from '../../Configs/Strings';
+import { useAuthStore } from '../../store/auth.store';
 
 const Registration = () => {
   const [profilePicture, setProfilePicture] = useState<File | null>(null);
@@ -17,6 +18,8 @@ const Registration = () => {
     password: '',
     confirm_password:''
   }) 
+
+  const updateAuth = useAuthStore().updateAuth;
 
   const registerUser = useRegisterUser();
 
@@ -109,6 +112,7 @@ const Registration = () => {
       onSuccess: async(response) => {
         if (response.data?.token) {
         await saveString(strings.userToken, response.data.token);
+        updateAuth(response.data)
         toast.success('Registration successful!');
         }
         // if (response.data?.token) {
