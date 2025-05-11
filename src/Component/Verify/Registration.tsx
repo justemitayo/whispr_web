@@ -5,6 +5,7 @@ import { useRegisterUser } from '../../Auths/hooks';
 import { saveString } from '../../Configs/Storage';
 import { strings } from '../../Configs/Strings';
 import { useAuthStore } from '../../store/auth.store';
+import { useNavigate } from 'react-router-dom';
 
 const Registration = () => {
   const [profilePicture, setProfilePicture] = useState<File | null>(null);
@@ -19,6 +20,8 @@ const Registration = () => {
     confirm_password:''
   }) 
 
+  const navigate = useNavigate()
+  
   const updateAuth = useAuthStore().updateAuth;
 
   const registerUser = useRegisterUser();
@@ -114,6 +117,7 @@ const Registration = () => {
         await saveString(strings.userToken, response.data.token);
         updateAuth(response.data)
         toast.success('Registration successful!');
+        navigate('/')
         }
         // if (response.data?.token) {
         //   localStorage.setItem('token', response.data.token);

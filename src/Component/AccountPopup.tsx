@@ -8,7 +8,7 @@ import Verification from './Verify/Verification';
 import { saveString } from '../Configs/Storage';
 import { strings } from '../Configs/Strings';
 import { useAuthStore } from '../store/auth.store';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 interface props{
@@ -34,6 +34,8 @@ const AccountPopup = ({setLoginPop}:props) => {
     email: "",
     password: ''
   })
+
+  const navigate = useNavigate()
 
   const updateAuth = useAuthStore().updateAuth;
 
@@ -66,6 +68,7 @@ const AccountPopup = ({setLoginPop}:props) => {
             email: '',
             password: ''
           })
+          navigate('/')
         }
       },
       onError: (error: any) => {

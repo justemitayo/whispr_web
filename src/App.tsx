@@ -7,6 +7,7 @@ import Navbar from './Component/Navbar';
 import AccountPopup from './Component/AccountPopup';
 import Verification from './Component/Verify/Verification';
 import Registration from './Component/Verify/Registration';
+import Home from './screen/Home/Home';
 
 const App:React.FC = () => {
 
@@ -17,9 +18,11 @@ const App:React.FC = () => {
       <div className="App">
       <Navbar setLoginPop ={setLoginPop}/>
       {/* <Verification email=''/> */}
-      <Registration />
+      {/* <Registration /> */}
       <Routes>
-        {/* <Route path='/register-user' element={<Registration />} /> */}
+        <Route path='/register-user' element={<Registration />} />
+        <Route path='/' element={<Home />} />
+        
       </Routes>
         <ToastContainer />
       </div>
