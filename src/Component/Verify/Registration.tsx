@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Registration.css'
 import { toast } from 'react-toastify';
-import { useRegisterUser } from '../../Auths/hooks';
+import { useRegisterUser } from '../../domain/Auths/hooks';
 import { saveString } from '../../Configs/Storage';
 import { strings } from '../../Configs/Strings';
 import { useAuthStore } from '../../store/auth.store';

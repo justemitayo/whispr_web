@@ -1,4 +1,4 @@
-import instance from "../Configs/Api";
+import instance from "../../Configs/Api";
 import { GetOTPRequest, GetOTPResponse, VerifyOTPRequest, VerifyOTPResponse, RegisterUserRequest, AuthResponse, LoginUserRequest} from "./types";
 
 export async function loginUser(
