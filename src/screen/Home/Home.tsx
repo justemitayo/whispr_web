@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuthStore } from '../../store/auth.store';
 import './Home.css'
+import Log from '../Log/Log';
 
 const Home = () => {
 
@@ -10,7 +11,7 @@ const Home = () => {
       {Auth ? (
         <p>Welcome back, {Auth.user?.user_name || 'User'}!</p>
       ) : (
-        <p>Please log in to continue.</p>
+        <Log />
       )}
     </div>
   )

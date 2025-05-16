@@ -21,6 +21,7 @@ const App:React.FC = () => {
       {/* <Registration /> */}
       <Routes>
         <Route path='/register-user' element={<Registration />} />
+        {/* <Route path='/verify' element={<Verification email='' />} /> */}
         <Route path='/' element={<Home />} />
         
       </Routes>

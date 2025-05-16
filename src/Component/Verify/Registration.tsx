@@ -6,6 +6,7 @@ import { saveString } from '../../Configs/Storage';
 import { strings } from '../../Configs/Strings';
 import { useAuthStore } from '../../store/auth.store';
 import { useNavigate } from 'react-router-dom';
+import PhoneInput from 'react-phone-input-2';
 
 const Registration = () => {
   const [profilePicture, setProfilePicture] = useState<File | null>(null);
@@ -55,28 +56,35 @@ const Registration = () => {
   
     if (!full_name.trim()) {
       toast.error('Full name is required.');
+      errors.push('full_name');
     }
   
-    if (!/^\d{10,15}$/.test(phone_number)) {
-      toast.error('Phone number must be 10 to 15 digits.');
+    if (!/^\+\d{10,15}$/.test(phone_number)) {
+      toast.error('Phone number must start with 234 and be 11 to 15 digits total.');
+      errors.push('phone_number');
     }
   
     if (!isValidEmail(email)) {
       toast.error('Email format is invalid.');
+      errors.push('email');
     }
   
     if (!password || password.length < 8) {
       toast.error('Password must be at least 8 characters.');
+      errors.push('password');
     }
   
     if (!confirm_password) {
       toast.error('Please confirm your password.');
+      errors.push('confirm_password');
     } else if (password !== confirm_password) {
       toast.error('Passwords do not match.');
+      errors.push('password_mismatch');
     }
   
     if (profilePicture && !profilePicture.type.startsWith('image/')) {
       toast.error('Profile picture must be an image file.');
+      errors.push('profile_picture');
     }
   
     return errors;
@@ -98,7 +106,8 @@ const Registration = () => {
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
 
-    validateInputs()
+    const errors = validateInputs();
+    if (errors.length > 0) return;
   
     const payload = {
       user_name: regUser.user_name.trim(),
@@ -107,7 +116,6 @@ const Registration = () => {
       phone_number: regUser.phone_number.trim(),
       email: regUser.email.trim(),
       password: regUser.password.trim(),
-      confirm_password: regUser.confirm_password.trim(),
       profile_picture: profilePicture
     }
 
@@ -190,14 +198,22 @@ const Registration = () => {
       </div>
       <div className='register-content'>
         <label>Phone Number:</label>
-        <input
+        {/* <input
           name='phone_number'
           type='tel'
           placeholder='phone Number'
           value={regUser.phone_number}
           onChange={handleInputChange}
           required
-        /> 
+        />  */}
+        <PhoneInput
+          country={'ng'} // default country
+          value={regUser.phone_number}
+          onChange={(value: string) =>
+            setRegUser((prev) => ({ ...prev, phone_number: value }))
+          }
+          inputStyle={{ width: 'max(25vw, 250px)', cursor:'pointer'}}
+                />
       </div>
       <div className='register-content'>
         <label>Email:</label>

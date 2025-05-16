@@ -13,7 +13,7 @@ export const useGetUsers = (payload: GetUsersRequest) => {
         limit: payload.limit || 20,
       }),
       getNextPageParam: (lastPage: GetUsersResponse) => {
-        const nextPage = lastPage?.data?.page?.next_page;
+        const nextPage = lastPage?.data?.page.next_page;
         return nextPage ? nextPage : undefined;
       },
       refetchIntervalInBackground: true,

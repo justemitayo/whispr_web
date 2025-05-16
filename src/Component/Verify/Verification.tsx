@@ -5,9 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import './Verification.css'
 
 interface props{
-  email: string
+  email: string,
+  setStep: React.Dispatch<React.SetStateAction<"otp" | "signup" >>
 }
-const Verification = ({email}: props) => {
+const Verification = ({email, setStep}: props) => {
   const [otp, setOtp] = useState<string[]>(Array(4).fill(''));
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
@@ -75,7 +76,9 @@ const Verification = ({email}: props) => {
         onSuccess: (data) => {
           toast.success(data.msg || 'OTP verified successfully!');
           console.log('Verification success:', data);
+          setOtp(Array(4).fill(''));
           // setLoginPop(false); 
+          // setStep(null)
           navigate('/register-user');
         },
         onError: (error: any) => {
@@ -88,6 +91,7 @@ const Verification = ({email}: props) => {
     const pendingUser = JSON.parse(localStorage.getItem('pendingUser') || '{}');
 
     if (!pendingUser?.email || !pendingUser?.user_name || !pendingUser?.phone_number) {
+      setStep('signup')
       toast.error('Missing user information. Please sign up again.');
       return;
     }

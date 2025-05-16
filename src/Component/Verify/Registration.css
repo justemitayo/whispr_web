@@ -17,7 +17,7 @@ label{
   font-style: oblique;
   margin-bottom: 0.5rem;
 }
-.register-content input{
+.register-content input {
   width: max(25vw, 250px);
   padding: 10px;
   border-radius: 0.3rem;

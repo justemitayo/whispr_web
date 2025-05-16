@@ -20,7 +20,7 @@ const AccountPopup = ({setLoginPop}:props) => {
   // const [phone, setPhone] = useState<string>('');
 
 
-  const [step, setStep] = useState<'signup' | 'otp'>('signup');
+  const [step, setStep] = useState<'signup' | 'otp' >('signup');
   const [email, setEmail] = useState('');
 
   const [reg, setReg] = useState({
@@ -46,6 +46,9 @@ const AccountPopup = ({setLoginPop}:props) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setReg({ ...reg, [e.target.name]: e.target.value });
   };
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLog({ ...log, [e.target.name]: e.target.value });
+  };
 
   const handleLog =  async( e: React.FormEvent) => {
     e.preventDefault();
@@ -68,6 +71,7 @@ const AccountPopup = ({setLoginPop}:props) => {
             email: '',
             password: ''
           })
+          setLoginPop(false)
           navigate('/')
         }
       },
@@ -86,7 +90,7 @@ const AccountPopup = ({setLoginPop}:props) => {
       phone_number: reg.phone_number.trim(),
     };
     if (!payload.email || !payload.phone_number || !payload.user_name) {
-      toast.error('Both fields are required');
+      toast.error('All fields are required');
       return;
     }
 
@@ -94,9 +98,11 @@ const AccountPopup = ({setLoginPop}:props) => {
       onSuccess: async(res) => {
         if(res.data){
           toast.success('OTP sent successfully!')
+          localStorage.setItem('pendingUser', JSON.stringify(payload));
           setEmail(payload.email);
           setStep('otp');
         }
+        navigate('/verify')
       },
       onError: (error: any) => {
         toast.error(`Error: ${error.message || 'Unknown error'}`);
@@ -125,16 +131,16 @@ const AccountPopup = ({setLoginPop}:props) => {
                   name='email'
                   placeholder='whispr@gmail.com'
                   required
-                  value={reg.email}
-                  onChange={handleChange}
+                  value={log.email}
+                  onChange={handleInput}
                 />
                 <input
                   type='password'
                   name='password'
                   placeholder='Enter your passkey'
                   required
-                  value={reg.password}
-                  onChange={handleChange}
+                  value={log.password}
+                  onChange={handleInput}
                 />
               </div>
             :
@@ -184,7 +190,7 @@ const AccountPopup = ({setLoginPop}:props) => {
        
       </form> 
        ) : (
-        <Verification email={email}/>
+        <Verification email={email} setStep={setStep}/> 
        )
       } 
     </div>
