@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
+import { AuthProvider } from './contexts/auth';
 
 const queryClient =  new QueryClient({
   defaultOptions: {
@@ -20,7 +21,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
       <ReactQueryDevtools initialIsOpen={false}/>
     </QueryClientProvider>
   
