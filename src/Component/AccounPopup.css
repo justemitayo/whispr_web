@@ -1,6 +1,6 @@
 .account-popup{
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   width: 100%;
   height: 100%;
   background-color: #00000000;
@@ -9,7 +9,7 @@
 .popup-component{
   place-self: center;
   width: max(20vw, 900px);
-  height: max(14vw, 600px);
+  height: max(14vh, 600px);
   color: #80808080;
   background-color: black;
   display: flex;
@@ -51,6 +51,7 @@
   margin-bottom: 2rem;
   outline: none;
   border: 1px solid rgb(174, 76, 23);
+  width: max(23vw, 700px);
   padding: 10px;
   height: 1.7rem;
   border-radius: 4px;

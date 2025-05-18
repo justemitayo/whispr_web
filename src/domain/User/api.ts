@@ -8,5 +8,9 @@ export async function getUsers(
     params: payload,
     // params is used with GET requests to send query parameters (e.g., ?search=foo&page=1&limit=20) in the URL.
   });
+  console.log(response.data, 'iamamigo')
+
   return response.data;
+
+
 }

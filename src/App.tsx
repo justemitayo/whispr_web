@@ -8,13 +8,16 @@ import AccountPopup from './Component/AccountPopup';
 import Verification from './Component/Verify/Verification';
 import Registration from './Component/Verify/Registration';
 import Home from './screen/Home/Home';
+import SeachModals from './screen/Modals/SeachModals';
 
 const App:React.FC = () => {
 
   const [loginPop, setLoginPop] = useState<boolean>(false)
+  const [allUser, setAllUser] = useState<boolean>(false)
   return (
     <BrowserRouter>
        {loginPop ? <AccountPopup setLoginPop={setLoginPop}/> : <></>}
+       {allUser ? <SeachModals setAllUser={setAllUser}/> : <></>}
       <div className="App">
       <Navbar setLoginPop ={setLoginPop}/>
       {/* <Verification email=''/> */}
@@ -22,7 +25,7 @@ const App:React.FC = () => {
       <Routes>
         <Route path='/register-user' element={<Registration />} />
         {/* <Route path='/verify' element={<Verification email='' />} /> */}
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home setAllUser={setAllUser}/>} />
         
       </Routes>
         <ToastContainer />

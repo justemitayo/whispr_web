@@ -1,0 +1,91 @@
+.searchmodal{
+  background-color: black;
+  position: absolute;
+  z-index: 1;
+  width: 100vw;
+  /* height: 100%; */
+  display: grid;
+}
+.searchmodal-content{
+  place-self: center;
+  width: max(20vw, 900px);
+  
+  /* height: max(20vw, 900px); */
+  /* height: 100%; */
+  color: #80808080;
+  /* background-color: rgb(93, 37, 7); */
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 4rem;
+  border-radius: 8px;
+  font-size: 14px;
+  animation: fadeIn 0.5s;
+}
+.searchmodal-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.searchmodal-head input{
+  width: max(20vw, 700px);
+  height: max(3vh, 3rem);
+  border-radius: 8px;
+  border: none;
+  font-size: 1.2rem;
+  padding-left: 1rem;
+}
+.searchmodal-head p{
+  height: 3rem;
+  border: 2px solid white;
+  width: 3rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.searchmodal-head p:hover {
+  background-color: red;
+}
+.userdata{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+.userdata-component{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  /* height: 6rem; */
+  /* background-color: yellow; */
+}
+.searchmodal button{
+  border: none;
+  color: black;
+  background-color: rgb(174, 76, 23);
+  width: max(25vw, 200px);
+  padding: 12px 0px;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 3rem;
+  font-size: 1.3rem;
+  /* border: 1px solid rgb(215, 209, 209); */
+
+}
+.user{
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0;
+  color: white;
+  place-content: start;
+  /* background-color: rebeccapurple; */
+}
+.userp{
+  font-size: 1rem;
+  /* background-color: rebeccapurple; */
+}
