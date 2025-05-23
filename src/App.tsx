@@ -3,10 +3,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import { Routes, Route, BrowserRouter } from 'react-router';
 import { ToastContainer } from 'react-toastify';
-import Navbar from './Component/Navbar';
-import AccountPopup from './Component/AccountPopup';
-import Verification from './Component/Verify/Verification';
-import Registration from './Component/Verify/Registration';
+import Navbar from './Components/Navbar';
+import AccountPopup from './Components/AccountPopup';
+import Registration from './Components/Verify/Registration';
 import Home from './screen/Home/Home';
 import SeachModals from './screen/Modals/SeachModals';
 

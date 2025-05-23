@@ -3,6 +3,7 @@ import { useAuthStore } from '../../store/auth.store';
 import './Home.css'
 import Log from '../Log/Log';
 import Modal from '../Modals/Modal';
+import Messenger from '../Messenger/Messenger';
 
 
 interface props{
@@ -35,6 +36,7 @@ const Home = ({setAllUser}: props) => {
             </p>
           )}
           <Modal setAllUser={setAllUser}/>
+          <Messenger />
         </>
       ) : (
         <Log />

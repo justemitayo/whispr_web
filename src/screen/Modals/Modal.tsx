@@ -6,6 +6,7 @@ import darkProfile from '../../assets/images/default_user_dark.jpg'
 import { reset } from '../../Configs/Storage';
 import { useAuthStore } from '../../store/auth.store';
 import { useQueryClient } from '@tanstack/react-query';
+import { Online } from '../../Components/Online/Online';
 
 
 interface props{
@@ -31,10 +32,13 @@ const Modal = ({setAllUser}:props) => {
       <div className='modal-content'>
           <SearchModal style={{width:'2.5rem', height:'2.5rem'}} onClick={() => setAllUser(true)}/>
           <div className='profile'>
-          <img alt='profilepicture' src={auth?.user?.profile_picture ? auth?.user?.profile_picture : darkProfile} onClick={() => setLogOut(true)} 
-            style={{width:'2.5rem', height:'2.5rem', borderRadius:'50%', cursor:"pointer"}}
-          />
-    
+            <div style={{position:'relative'}}>
+              <img alt='profilepicture' src={auth?.user?.profile_picture ? auth?.user?.profile_picture : darkProfile} onClick={() => setLogOut(true)} onDoubleClick={() => setLogOut(false)} 
+              style={{width:'2.5rem', height:'2.5rem', borderRadius:'50%', cursor:"pointer"}}
+              />
+              <Online rightOffset={-4}/>
+            </div>
+
 
         {logOut && (
           <div className="logout-confirm">

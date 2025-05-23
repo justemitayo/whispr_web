@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import { useGetUsers } from '../../domain/User/hooks'
 import './SearchModals.css'
+import { Online } from '../../Components/Online/Online'
 
 interface props{
   setAllUser :  React.Dispatch<React.SetStateAction<boolean>>
@@ -38,7 +39,10 @@ const SeachModals = ({setAllUser}: props) => {
               {usersData.map((user) => (
                 <div  key={user?.user_id} className='userdata'>
                   <div className='userdata-component'>
-                    <img alt='' src={user?.profile_picture}  className='userdata-img'  style={{ width: '6rem', height: '6rem', borderRadius: '50%' }}/>
+                    <div className='user-data'>
+                      <img alt='' src={user?.profile_picture}  className='userdata-img'  style={{ width: '5rem', height: '5rem', borderRadius: '50%' }}/>
+                      <Online />
+                    </div>
                     <div className='userdata-content' style={{gap:'0'}}>
                       <p className='user'>{user?.full_name}</p>
                       <p className='userp'>@{user?.user_name}</p>

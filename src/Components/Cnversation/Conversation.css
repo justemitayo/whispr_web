@@ -1,0 +1,24 @@
+.conversation{
+  display: flex;
+  align-items: center;
+  padding: 0.6rem;
+  cursor: pointer;
+  margin-top: 1.2rem;
+  cursor: pointer;
+}
+.conversation:hover {
+  background-color: rgb(62, 60, 60);
+}
+.conversation-content{
+  position: relative;
+}
+.conversation-content img{
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 1.2rem ;
+}
+.conversation-content span{
+  font-weight: 500;
+}
