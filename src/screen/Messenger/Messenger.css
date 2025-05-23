@@ -3,12 +3,13 @@ p{
 }
 .messenger{
   height: calc(100vh - 210px);
-  padding: 1rem 2rem;
+  /* padding: 0rem 2rem; */
   display: flex;
   color: white;
 }
 .chat-menu{
   flex: 3.5;
+  border-right: 2px solid rgb(174, 76, 23);
 }
 .menu-input{
   width: 90%;
@@ -55,4 +56,16 @@ p{
 .box-top, .menu-top{
    height: 100%;
    overflow-y: scroll;
+}
+.chat-header-top{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  /* justify-content: space-between; */
+}
+.chat-header{
+  display: flex;
+  align-items: center;
+  height: 5.5rem;
+  background-color: rgb(104, 42, 9);
 }
