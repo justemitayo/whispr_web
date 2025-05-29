@@ -30,3 +30,13 @@ export const useAuthStore = create<
 
 
 // zustand to persist input data
+
+
+
+
+
+
+
+// localeCompare() is used to compare two date strings (assuming updated_at is a string in ISO format).
+// b.localeCompare(a) results in a descending order (most recent chats first).
+// The ! is the non-null assertion operator (TypeScript), telling the compiler you’re sure updated_at is not null or undefined.

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AuthContext, IAuthProvider } from './interface';
-import { useAuthStore } from '../store/auth.store';
+import { useAuthStore } from '../../store/auth.store';
 
 export const AuthProvider: IAuthProvider = function AuthProvider({ children }) {
   const authStat = useAuthStore().auth;

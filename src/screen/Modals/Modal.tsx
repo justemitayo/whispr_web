@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ReactComponent as SearchModal } from '../../assets/svg/search-modal.svg' 
 import './Modal.css';
-import { useAuth } from '../../contexts/interface';
+import { useAuth } from '../../contexts/Auth/interface';
 import darkProfile from '../../assets/images/default_user_dark.jpg'
 import { reset } from '../../Configs/Storage';
 import { useAuthStore } from '../../store/auth.store';

@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Messenger.css'
 import Conversation from '../../Components/Cnversation/Conversation'
 import Message from '../../Components/Message/Message'
 import user from '../../assets/images/default_user_dark.jpg'
 import { Online } from '../../Components/Online/Online'
+import { useAuth } from '../../contexts/Auth/interface'
 
 const Messenger = () => {
+
+  const [conversations, setConversations] = useState([]);
+  const auth = useAuth().auth;
+
   return (
     <div className='messenger'>
       <div className='chat-menu'>
