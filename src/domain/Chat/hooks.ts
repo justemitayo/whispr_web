@@ -36,10 +36,12 @@ export const useGetUsers = (payload: GetUserChatsRequest) => {
   });
   useEffect(() => {
     if (query.isSuccess && query.data){
-      const userChatsData: IChat[] =
+        const userChatsData: IChat[] =
           (query?.data?.pages || [])
           ?.flatMap((page) => page?.data || [])
           ?.flatMap((item) => item?.items || []) || [];
+
+
         updateChat(userChatsData);
     }
   }, [query.isSuccess, query.data, updateChat]);

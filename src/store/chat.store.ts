@@ -157,6 +157,9 @@ export const useChatStore = create<
     {
       name: 'chat-storage',
       storage: createJSONStorage(() => localStorage),
+      onRehydrateStorage: () => state => {
+        state?.setHydrated();
+      },
     }
   )
 )

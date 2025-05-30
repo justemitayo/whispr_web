@@ -1,5 +1,5 @@
 import React,{useRef, useState, useEffect} from 'react'
-import { useGetOTP, useVerifyOTP } from '../../domain/Auths/hooks'
+import { useGetOTP, useVerifyOTP } from '../../domain/Auth/hooks'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
 import './Verification.css'

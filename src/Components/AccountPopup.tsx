@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './AccounPopup.css'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css'; 
-import { useGetOTP, useLoginUser } from '../domain/Auths/hooks';
+import { useGetOTP, useLoginUser } from '../domain/Auth/hooks';
 import { toast } from 'react-toastify';
 import Verification from './Verify/Verification';
 import { saveString } from '../Configs/Storage';
