@@ -69,3 +69,12 @@ p{
   height: 5.5rem;
   background-color: rgb(104, 42, 9);
 }
+.conversation-text{
+  position: absolute;
+  top: 50%;
+  padding-left: 1rem;
+  font-size: 3.5rem;
+  place-self: center;
+  color:rgb(174, 76, 23); 
+  cursor: default;
+}

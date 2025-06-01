@@ -7,6 +7,7 @@ import { strings } from '../../Configs/Strings';
 import { useAuthStore } from '../../store/auth.store';
 import { useNavigate } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2';
+import picture from '../../assets/images/default_user_dark.jpg'
 
 const Registration = () => {
   const [profilePicture, setProfilePicture] = useState<File | null>(null);
@@ -142,7 +143,7 @@ const Registration = () => {
     <form onSubmit={handleSubmit} className='register'>
       <div className='register-picture'>
         <input type="file" accept="image/*" onChange={profileChange} />
-        {preview && <img src={preview} alt="Preview"  />}
+        {preview && <img src={preview ? preview : picture} alt="Preview"  />}
       </div>
 
 

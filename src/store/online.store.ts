@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { IOnlineUser } from "../interface/socket";
 
+
 type State = {
   online_user: IOnlineUser[]
 }
