@@ -52,6 +52,7 @@ export const useChatStore = create<
         })
       },
       updateChat: (chats) => {
+        //putting the latest message first
         set(() => ({
             chats: [...chats]?.sort((a, b) =>
             b?.updated_at!?.localeCompare(a?.updated_at!)

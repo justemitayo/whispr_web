@@ -13,7 +13,7 @@ type Action = {
   clearOnlineUsers: () => void;
 }
 
-export const useChatStore = create<
+export const useOnlineStore = create<
   State & Action,
   [['zustand/persist', unknown]] 
 >(
