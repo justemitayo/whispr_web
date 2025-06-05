@@ -74,7 +74,10 @@ p{
   top: 50%;
   padding-left: 1rem;
   font-size: 3.5rem;
-  place-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color:rgb(174, 76, 23); 
   cursor: default;
 }
+

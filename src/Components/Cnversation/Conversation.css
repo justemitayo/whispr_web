@@ -9,6 +9,11 @@
 .conversation:hover {
   background-color: rgb(62, 60, 60);
 }
+.conversation-component{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 .conversation-content{
   position: relative;
 }
@@ -19,6 +24,36 @@
   object-fit: cover;
   margin-right: 1.2rem ;
 }
-.conversation-content span{
-  font-weight: 500;
+.conversation-left{
+  display: flex;
+  /* background-color: blue; */
+  justify-content: space-between;
+  width: 100%;
+}
+.notsent{
+  width: 1rem;
+  height: 1rem;
+  color: gray;
+}
+.tick{
+  width: 1.5rem;
+  height: 1.5rem;
+  color: gray;
+}
+.new-icon p{
+  color: rgb(174, 76, 23);
+}
+.new-icon{
+  border: 1px solid rgb(104, 42, 9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  width: 2.5rem;
+  height: 2rem;
+  background-color: rgb(104, 42, 9);
+}
+.conversation-bottom{
+  display: flex;
+  justify-content: space-between;
 }

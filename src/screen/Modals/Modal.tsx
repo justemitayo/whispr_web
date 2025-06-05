@@ -7,6 +7,7 @@ import { reset } from '../../Configs/Storage';
 import { useAuthStore } from '../../store/auth.store';
 import { useQueryClient } from '@tanstack/react-query';
 import { Online } from '../../Components/Online/Online';
+import { useMessageStore } from '../../store/message.store';
 
 
 interface props{
@@ -17,7 +18,9 @@ const Modal = ({setAllUser}:props) => {
 
   const auth = useAuth().auth;
   const clearAuth = useAuthStore().clearAuth;
+  const clearMessages = useMessageStore().clearMessages
   const queryClient = useQueryClient()
+  // const {chat:}
 
 
   const handleLogout = async() =>{
@@ -30,7 +33,10 @@ const Modal = ({setAllUser}:props) => {
     <div className='modal'>
       <h2>Conversation</h2>
       <div className='modal-content'>
+
           <SearchModal style={{width:'2.5rem', height:'2.5rem'}} onClick={() => setAllUser(true)}/>
+
+
           <div className='profile'>
             <div style={{position:'relative'}}>
               <img alt='profilepicture' src={auth?.user?.profile_picture ? auth?.user?.profile_picture : darkProfile} onClick={() => setLogOut(true)} onDoubleClick={() => setLogOut(false)} 
