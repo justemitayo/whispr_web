@@ -1,0 +1,10 @@
+.addUser{
+  color: rgb(4, 4, 246);
+  font-size: 1.2rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.addUser:hover {
+  color: rgb(183, 183, 244);
+}

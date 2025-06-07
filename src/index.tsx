@@ -5,6 +5,7 @@ import App from './App';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
 import { AuthProvider } from './contexts/Auth/auth';
+import { SocketProvider } from './contexts/Socket/socket';
 
 const queryClient =  new QueryClient({
   defaultOptions: {
@@ -22,7 +23,9 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <App />
+        <SocketProvider>
+          <App />
+        </SocketProvider>
       </AuthProvider>
       <ReactQueryDevtools initialIsOpen={false}/>
     </QueryClientProvider>

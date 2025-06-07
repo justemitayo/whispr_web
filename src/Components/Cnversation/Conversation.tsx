@@ -1,7 +1,6 @@
 import React from 'react'
 import './Conversation.css';
 import { Online } from '../Online/Online';
-import { useAuth } from '../../contexts/Auth/interface';
 import { ConversationProps } from './conversation_props';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
@@ -17,12 +16,10 @@ const timeAgo = new TimeAgo('en-US');
 const Conversation = (
   {
     online,
-    chat_id,
     recipient_info,
     last_message_info
   }:ConversationProps
 ) => {
-  const auth = useAuth().auth;
   const messageDate = last_message_info?.at ? new Date(last_message_info.at) : null;
 
   return (
@@ -33,8 +30,7 @@ const Conversation = (
       </div>
         <div className='conversation-component'>
           <div className='conversation-left'>
-            {/* <span>{truncate(recipient_info?.user_name || '', 23)}</span> */}
-            <span>john doe</span>
+            <span>{truncate(recipient_info?.user_name || '', 23)}</span>
             <span>{messageDate? timeAgo.format(
               new Date(last_message_info?.at || '').getTime()
             ): ''}</span>

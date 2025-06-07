@@ -10,7 +10,7 @@ export function Online({
 }: OnlineIndicatorProps): React.JSX.Element {
   const outerStyle: React.CSSProperties = {
     position: 'absolute',
-    backgroundColor: '#fff', // fallback background color
+    backgroundColor: '#000', // fallback background color
     width: outerSize,
     height: outerSize,
     borderRadius: outerSize,
@@ -25,7 +25,7 @@ export function Online({
     width: innerSize,
     height: innerSize,
     borderRadius: innerSize,
-    backgroundColor: online ? '#00C851' : '#ccc', // green if online, grey if offline
+    backgroundColor: online ?'#00C851': '#ccc'  , // green if online, grey if offline
   };
 
   return (

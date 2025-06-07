@@ -47,8 +47,6 @@ const Messenger = () => {
             <span className='conversation-text' style={{fontSize:"2rem"}}>No Text Found!</span>
           )
         }
-            <Conversation />
-            <Conversation />
           </div>
         </div> 
       </div>

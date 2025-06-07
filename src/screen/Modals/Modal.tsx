@@ -8,6 +8,8 @@ import { useAuthStore } from '../../store/auth.store';
 import { useQueryClient } from '@tanstack/react-query';
 import { Online } from '../../Components/Online/Online';
 import { useMessageStore } from '../../store/message.store';
+import { useOnlineStore } from '../../store/online.store';
+import { useChatStore } from '../../store/chat.store';
 
 
 interface props{
@@ -19,15 +21,17 @@ const Modal = ({setAllUser}:props) => {
   const auth = useAuth().auth;
   const clearAuth = useAuthStore().clearAuth;
   const clearMessages = useMessageStore().clearMessages
-  const queryClient = useQueryClient()
-  // const {chat:}
+  const queryClient = useQueryClient();
+  const isOnline = useOnlineStore().isOnline;
+  const clearChat = useChatStore().clearChat;
 
 
   const handleLogout = async() =>{
     await reset();
     clearAuth();
-    queryClient.clear()
-
+    clearMessages();
+    clearChat();
+    queryClient.clear();
   }
   return (
     <div className='modal'>
@@ -42,7 +46,7 @@ const Modal = ({setAllUser}:props) => {
               <img alt='profilepicture' src={auth?.user?.profile_picture ? auth?.user?.profile_picture : darkProfile} onClick={() => setLogOut(true)} onDoubleClick={() => setLogOut(false)} 
               style={{width:'2.5rem', height:'2.5rem', borderRadius:'50%', cursor:"pointer"}}
               />
-              <Online rightOffset={-4}/>
+              <Online rightOffset={-4} online={isOnline(auth?.user?.user_id || '')}/>
             </div>
 
 

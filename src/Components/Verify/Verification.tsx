@@ -97,6 +97,7 @@ const Verification = ({email, setStep}: props) => {
     }
 
     getOTP.mutate(pendingUser, {
+
       onSuccess: () => {
         toast.success('OTP resent!');
         setOtp(Array(4).fill(''));

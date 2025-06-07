@@ -6,7 +6,7 @@ import { IChat } from '../../interface/chat';
 import { useEffect } from 'react';
 
 
-export const useCreateChat = (): UseMutationResult<CreateChatResponse, Error, CreateChatRequest> => {
+export const useCreateChat = () => {
   return useMutation<CreateChatResponse, Error, CreateChatRequest>({
     mutationFn: createChat,
   });

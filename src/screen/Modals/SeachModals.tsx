@@ -2,12 +2,17 @@ import React,{useState} from 'react'
 import { useGetUsers } from '../../domain/User/hooks'
 import './SearchModals.css'
 import { Online } from '../../Components/Online/Online'
+import AddUser from '../../Components/AddUser/AddUser'
+import { useAuth } from '../../contexts/Auth/interface'
+import { useOnlineStore } from '../../store/online.store'
 
 interface props{
   setAllUser :  React.Dispatch<React.SetStateAction<boolean>>
 }
 const SeachModals = ({setAllUser}: props) => {
   const [userSearch, setUserSearch] = useState<string>('');
+  const {auth} = useAuth();
+  const isOnline = useOnlineStore().isOnline
 
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, error, status } = useGetUsers({
     search: userSearch,
@@ -41,20 +46,26 @@ const SeachModals = ({setAllUser}: props) => {
                   <div className='userdata-component'>
                     <div className='user-data'>
                       <img alt='' src={user?.profile_picture}  className='userdata-img'  style={{ width: '5rem', height: '5rem', borderRadius: '50%' }}/>
-                      <Online />
+                      <Online 
+                        online={isOnline(auth?.user?.user_id || '')}
+                      />
                     </div>
                     <div className='userdata-content' style={{gap:'0'}}>
-                      <p className='user'>{user?.full_name}</p>
-                      <p className='userp'>@{user?.user_name}</p>
+                      <p className='user'>{user?.full_name || ''}</p>
+                      <p className='userp'>@{user?.user_name || ''}</p>
                       <p className='userp' style={{fontStyle:"italic"}}>{user?.bio}</p>
                     </div>
                   </div>
-                  <p>Add</p>
-                  {/* <AddUser /> */}
+                  <AddUser
+                    user={user}
+                    currentUser={auth}
+                    setAllUser={setAllUser}
+                  />
                 </div>
               ))}
               <div>
                 <button
+                  className='search-button'
                   onClick={() => fetchNextPage()}
                   disabled={!hasNextPage || isFetchingNextPage}
                 >
