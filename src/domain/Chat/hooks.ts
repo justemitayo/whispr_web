@@ -1,4 +1,4 @@
-import { useInfiniteQuery, type InfiniteData, useMutation, UseMutationResult } from '@tanstack/react-query';
+import { useInfiniteQuery, type InfiniteData, useMutation } from '@tanstack/react-query';
 import { createChat, getUserChats } from './api';
 import { GetUserChatsRequest, CreateChatRequest, CreateChatResponse, GetUserChatsResponse, } from './types';
 import { useChatStore } from '../../store/chat.store';
@@ -12,7 +12,7 @@ export const useCreateChat = () => {
   });
 };
 
-export const useGetUsers = (payload: GetUserChatsRequest) => {
+export const useGetUserChats = (payload: GetUserChatsRequest) => {
 
   const { updateChat, isHydrated } = useChatStore();
 

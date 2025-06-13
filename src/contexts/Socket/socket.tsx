@@ -26,7 +26,7 @@ export const SocketProvider: ISocketProvider = function SocketProvider({ childre
   useEffect(() => { 
     const newSocket = io(EnvConfig.baseURL, {
       query: {
-        userId: auth?.user?.user_id
+        user_Id: auth?.user?.user_id
       },
     })
     setSocket(newSocket);
@@ -42,6 +42,7 @@ export const SocketProvider: ISocketProvider = function SocketProvider({ childre
     }
     socket.emit('add_new_online_user');
     socket.on('get_online_users', (data: IOnlineUser[]) =>{
+      console.log({get_online_users: data})
       updateOnlineUsers(data)
     })
 

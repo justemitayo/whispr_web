@@ -7,9 +7,9 @@ import { reset } from '../../Configs/Storage';
 import { useAuthStore } from '../../store/auth.store';
 import { useQueryClient } from '@tanstack/react-query';
 import { Online } from '../../Components/Online/Online';
-// import { useMessageStore } from '../../store/message.store';
+import { useMessageStore } from '../../store/message.store';
 import { useOnlineStore } from '../../store/online.store';
-// import { useChatStore } from '../../store/chat.store';
+import { useChatStore } from '../../store/chat.store';
 import Swal from 'sweetalert2';
 
 
@@ -20,17 +20,17 @@ const Modal = ({setAllUser}:props) => {
 
   const auth = useAuth().auth;
   const clearAuth = useAuthStore().clearAuth;
-  // const clearMessages = useMessageStore().clearMessages
+  const clearMessages = useMessageStore().clearMessages
   const queryClient = useQueryClient();
   const isOnline = useOnlineStore().isOnline;
-  // const clearChat = useChatStore().clearChat;
+  const clearChat = useChatStore().clearChat;
 
 
   const handleLogout = async() =>{
     await reset();
     clearAuth();
-    // clearMessages();
-    // clearChat();
+    clearMessages();
+    clearChat();
     queryClient.clear();
   }
   const confirmLogout = async () => {
