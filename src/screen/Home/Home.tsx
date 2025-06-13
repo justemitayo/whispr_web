@@ -48,10 +48,3 @@ const Home = ({setAllUser}: props) => {
 export default Home
 
 
-// const [searchChat, setSearchChat] = useState<string>('');
-// const filteredChats =
-//   userChats.filter(
-//     chat =>
-//       chat?.recipient_info?.full_name?.includes(searchChat) ||
-//       chat.recipient_info?.user_name?.includes(searchChat),
-//   ) || [];

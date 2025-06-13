@@ -9,7 +9,8 @@ import { truncate } from '../../slice/truncate';
 import notSent from '../../assets/svg/not-sent.svg';
 import tick from '../../assets/svg/tick.svg';
 import doubletick from '../../assets/svg/double-tick.svg';
-
+import { useAuth } from '../../contexts/Auth/interface';
+import { MessageCipher } from '../../libs/Bytelock';
 
 TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
@@ -20,8 +21,29 @@ const Conversation = (
     last_message_info
   }:ConversationProps
 ) => {
+  const auth = useAuth().auth;
   const messageDate = last_message_info?.at ? new Date(last_message_info.at) : null;
 
+  const is_user = auth?.user?.user_id === last_message_info?.sender_id;
+
+  const senderId = last_message_info?.sender_id;
+  const recipientId = is_user ? recipient_info?.user_id : auth?.user?.user_id;
+  
+  let deciphered_text = '';
+  
+  if (senderId && recipientId && last_message_info?.type === 'Text') {
+    try {
+      const cipherKey = MessageCipher.generateCipherKey(senderId, recipientId);
+      deciphered_text = MessageCipher.decipherMessage(
+        String(last_message_info.data),
+        cipherKey
+      );
+    } catch (err) {
+      console.error('Decryption failed:', err);
+      deciphered_text = '[Unable to decrypt message]';
+    }
+  }
+  
   return (
     <div className='conversation'>
       <div className='conversation-content'>
@@ -36,15 +58,19 @@ const Conversation = (
             ): ''}</span>
           </div>
           <div className='conversation-bottom'>
-            <p style={{color:'gray', fontSize:'0.9rem'}}>{`send a mesage to ${truncate(recipient_info?.full_name || '', 40)}...`}</p>
+            <p style={{color:'gray', fontSize:'0.9rem'}}>
+              {
+              // truncate(last_message_info?.data || '', 40)
+              deciphered_text
+              ||`send a mesage to ${truncate(recipient_info?.full_name || '', 40)}...`}</p>
             { last_message_info?.data ? (
-              <>
+              <div className='conversation-side'>
                 {typeof last_message_info?.unread === 'number' && last_message_info?.unread > 0 ? 
-                  (<p>{last_message_info?.unread>9 ? '9+' : last_message_info?.unread.toString()}</p>)
+                  (<div style={{width:'1.3rem', height:'1.3rem', borderRadius:'50%', backgroundColor:'yellow', display:'flex', alignItems:'center', justifyContent:'center'}}><span className='style-ish'>{last_message_info?.unread>9 ? '9+' : last_message_info?.unread.toString()}</span></div>)
                   :
                   last_message_info?.status === 'N' ? <img  alt='' src={notSent} className='notsent'/> : <img alt='' src={last_message_info?.status === 'U' ? tick : doubletick } className='tick'/>
                 }
-              </>
+              </div>
             ): 
             <div className='new-icon'><p>new</p></div>
             }

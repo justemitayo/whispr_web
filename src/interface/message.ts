@@ -22,4 +22,5 @@ export interface IMessage {
   status?: `${IMessageStatus}`;
   createdAt?: string;
   updatedAt?: string;
+
 }
