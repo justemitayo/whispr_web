@@ -23,5 +23,7 @@ export async function getUserChats(
       limit: payload.limit,
     },
   });
+
+  console.log('👀 API response from getUserChats:', response.data);
   return response.data;
 }

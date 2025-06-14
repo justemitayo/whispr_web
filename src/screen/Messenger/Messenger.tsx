@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react'
+import  { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react'
 import './Messenger.css'
 import Conversation from '../../Components/Cnversation/Conversation'
 import Message from '../../Components/Message/Message'
@@ -15,12 +15,14 @@ import { INewMessage, IRequestChatMessages} from '../../interface/socket'
 import { IChat } from '../../interface/chat'
 import { truncate } from '../../slice/truncate';
 import { MessageCipher } from '../../libs/Bytelock'
+import { useGetUserChats } from '../../domain/Chat/hooks'
 
 
 
 const Messenger: FunctionComponent = () => {
 
   // this is for conversation
+
   const [currentChatId, setCurrentChatId] = useState<string | null>(null);
   const [recipientInfo, setRecipientInfo] = useState<IChat['recipient_info'] | null>(null)
   const [currentChat, setCurrentChat] = useState<boolean>(false);
@@ -30,11 +32,54 @@ const Messenger: FunctionComponent = () => {
   const {user_message, updateMessages, isHydrated, addMessageOffline} = useMessageStore()
   const auth = useAuth().auth;
   const {chats: users} = useChatStore();
-  const isOnline = useOnlineStore().isOnline
+  const isOnline = useOnlineStore().isOnline;
+
+  
+
+  const { isPending, fetchNextPage, isFetching, refetch } = useGetUserChats({
+    limit: 20,
+    user_id: auth?.user?.user_id!,
+    
+  });
+  console.log('DEBUG: auth.user:', auth?.user);
+  console.log('DEBUG: isHydrated:', isHydrated);
+
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+  
+    const handleScroll = () => {
+      const scrollTop = container.scrollTop;
+      const scrollHeight = container.scrollHeight;
+      const clientHeight = container.clientHeight;
+  
+      const isBottom = scrollTop + clientHeight >= scrollHeight - 100;
+      const isTop = scrollTop <= 0;
+  
+      if (isBottom && !isFetching) {
+        fetchNextPage();
+      }
+  
+      if (isTop && !isFetching) {
+        refetch();
+      }
+    };
+  
+    container.addEventListener('scroll', handleScroll);
+  
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+    };
+  }, [isFetching, fetchNextPage, refetch]);
+  
+
 
 
   const [searchChat, setSearchChat] = useState<string>('');
-  const filteredChats = (users || []).filter(chat => {
+  const filteredChats = users.filter(chat => {
     const fullName = chat?.recipient_info?.full_name?.toLowerCase().trim();
     const userName = chat?.recipient_info?.user_name?.toLowerCase().trim();
     const search = searchChat.toLowerCase().trim();
@@ -173,27 +218,32 @@ const Messenger: FunctionComponent = () => {
             value={searchChat}
             onChange={(e) => setSearchChat(e.target.value)}
           />
-          <div className='menu-top' >
-          {(filteredChats || [])?.length > 0 ? (
-            filteredChats?.map((chat, index) => (
-              <div
-                key={`${chat.chat_id} - ${index}`}
-                onClick={() => {
-                  setCurrentChatId(chat.chat_id ?? '');
-                  setRecipientInfo(chat.recipient_info);
-                  setCurrentChat(true)
-                }}
-              >
-              <Conversation 
-                {...chat}
-                online={isOnline(chat?.recipient_info?.user_id || '')}
-              />
-            </div>
-          ))):(
-            <span className='conversation-text' style={{fontSize:"2rem"}}>No Chat Found!</span>
-          )
-        }
-          </div>
+
+          {isPending && users?.length === 0 ? (<p>Loading Chats...</p>) : (
+              <div className='menu-top'          
+               ref={scrollRef}>
+              {(filteredChats || [])?.length > 0 ? (
+                  filteredChats?.map((chat, index) => (
+                    <div
+                      key={`${chat.chat_id} - ${index}`}
+                      onClick={() => {
+                        setCurrentChatId(chat.chat_id ?? '');
+                        setRecipientInfo(chat.recipient_info);
+                        setCurrentChat(true)
+                      }}
+                    >
+                    <Conversation 
+                      {...chat}
+                      online={isOnline(chat?.recipient_info?.user_id || '')}
+                    />
+                  </div>
+                ))):(
+                  <span className='conversation-text' style={{fontSize:"2rem"}}>No Chat Found!</span>
+                )
+              }
+                </div>
+          )}
+x
         </div> 
       </div>
       <div className='chat-box'>
@@ -236,7 +286,7 @@ const Messenger: FunctionComponent = () => {
                   autoComplete='off'
                   autoCorrect='off'
                   placeholder='Start typing...'
-                  onKeyDown={(e) => {
+                  onKeyDown={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
                       e.preventDefault();
                       preSendMessage({ type: 'Text', data: newMsg });

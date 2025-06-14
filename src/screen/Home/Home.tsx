@@ -19,7 +19,7 @@ const Home = ({setAllUser}: props) => {
     if (Auth) {
       const timer = setTimeout(() => {
         setShowWelcome(false);
-      }, 120000); 
+      }, 10000); 
 
       return () => clearTimeout(timer); 
     }

@@ -8,11 +8,11 @@ import { MessageBoxProps } from './MessageProps'
 import { useAuth } from '../../contexts/Auth/interface'
 import { useSocket } from '../../contexts/Socket/interface'
 import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en.json';
 import { IMessage } from '../../interface/message';
 import { MessageCipher } from '../../libs/Bytelock';
+import orange from '../../assets/svg/orange-tick.svg'
 
-TimeAgo.addDefaultLocale(en);
+
 const timeAgo = new TimeAgo('en-US');
 
 const Message = ({
@@ -123,7 +123,7 @@ const Message = ({
           whiteSpace: 'pre-wrap',
         }}
       >
-        {decipheredText || 'hahaha'}
+        {decipheredText || ''}
       </p>
 
       {is_user && (
@@ -132,15 +132,27 @@ const Message = ({
             <img
               src={notSend}
               alt='Not Sent'
-              style={{ width: 14, height: 14, marginTop: 4, backgroundColor:'yellow' }}
+              style={{ width: 14, height: 14, marginTop: 4 }}
             />
-          ) : (
+            ) : status === 'U' ?( 
             <img
-              src={status === 'U' ? tick : doubletick}
+              src={tick}
               alt='Sent Status'
-              style={{ width: status === 'U' ? 14 : 24, height: 'auto', marginTop: 4, backgroundColor:'yellow',display:"flex", alignContent:'flex-end'}}
+              style={{ width: status === 'U' ? 14 : 24, height: 'auto', marginTop: 4, display:"flex", alignContent:'flex-end'}}
             />
-          )}
+            ) : status === 'D' ? (
+            <img 
+            alt=''
+            src={doubletick}
+            style={{width:'24', height:'24', marginTop:'4'}}
+            /> ): (
+              <img 
+              alt=''
+              src={orange}
+              style={{width:'24', height:'24', marginTop:'4'}}
+              />  
+            )
+          }  
         </>
       )}
     </div>

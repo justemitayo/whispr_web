@@ -35,7 +35,7 @@ export const useChatStore = create<
       addChat: (chat, queryClient, userId) => {
         set(() => {
           if (queryClient && userId) {
-            queryClient.invalidateQueries({queryKey: ['getUserChat', userId]})
+            queryClient.invalidateQueries({queryKey: ['getUserChats', userId]})
             // triggers the old data to be updated
           }
           
@@ -67,11 +67,16 @@ export const useChatStore = create<
               // Cancel any ongoing fetches for the user's chats to avoid race conditions
           if(chat_to_update && message?.data) {
             if(queryClient && userId){
-              queryClient.cancelQueries({queryKey: ['getUserChat', userId]});
+              queryClient.cancelQueries({queryKey: ['getUserChats', userId]});
               // cancels the one in addchat
 
               const old_chat: InfiniteData<GetUserChatsResponse> | undefined = 
-                queryClient.getQueryData(['getUserChat', userId]);
+                queryClient.getQueryData(['getUserChats', userId]);
+
+                  // 🔒 prevent crash if no cache exists yet
+              if (!old_chat || !Array.isArray(old_chat.pages)) {
+                return state; // or skip queryClient.setQueryData completely
+              }
 
 
                 // Create a new updated version of the cached data, updating the chat message info

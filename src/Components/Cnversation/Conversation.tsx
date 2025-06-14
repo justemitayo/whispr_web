@@ -3,16 +3,15 @@ import './Conversation.css';
 import { Online } from '../Online/Online';
 import { ConversationProps } from './conversation_props';
 import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en.json';
 import profile from '../../assets/images/default_user_dark.jpg';
 import { truncate } from '../../slice/truncate';
 import notSent from '../../assets/svg/not-sent.svg';
 import tick from '../../assets/svg/tick.svg';
+import orange from '../../assets/svg/orange-tick.svg';
 import doubletick from '../../assets/svg/double-tick.svg';
 import { useAuth } from '../../contexts/Auth/interface';
 import { MessageCipher } from '../../libs/Bytelock';
 
-TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 const Conversation = (
   {
@@ -66,9 +65,9 @@ const Conversation = (
             { last_message_info?.data ? (
               <div className='conversation-side'>
                 {typeof last_message_info?.unread === 'number' && last_message_info?.unread > 0 ? 
-                  (<div style={{width:'1.3rem', height:'1.3rem', borderRadius:'50%', backgroundColor:'yellow', display:'flex', alignItems:'center', justifyContent:'center'}}><span className='style-ish'>{last_message_info?.unread>9 ? '9+' : last_message_info?.unread.toString()}</span></div>)
+                  (<div style={{width:'1.3rem', height:'1.3rem', borderRadius:'50%', backgroundColor:'rgb(104, 42, 9)', display:'flex', alignItems:'center', justifyContent:'center'}}><span className='style-ish'>{last_message_info?.unread>9 ? '9+' : last_message_info?.unread.toString()}</span></div>)
                   :
-                  last_message_info?.status === 'N' ? <img  alt='' src={notSent} className='notsent'/> : <img alt='' src={last_message_info?.status === 'U' ? tick : doubletick } className='tick'/>
+                  last_message_info?.status === 'N' ? <img  alt='' src={notSent} className='notsent'/> : last_message_info?.status === 'U' ?<img alt='' src={tick} className='tick'/> : last_message_info?.status === 'D' ? <img alt='' src={doubletick} className='tick'/>: <img alt='' src={orange} className='tick'/> 
                 }
               </div>
             ): 

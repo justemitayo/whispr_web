@@ -27,7 +27,7 @@ const SeachModals = ({setAllUser}: props) => {
 
   useEffect(() => {
     if (auth?.user?.user_id) {
-      queryClient.invalidateQueries({queryKey:['getUserChat', auth?.user?.user_id]});
+      queryClient.invalidateQueries({queryKey:['getUserChats', auth?.user?.user_id]});
     }
   }, [auth?.user?.user_id, queryClient]);
 

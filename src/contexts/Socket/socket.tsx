@@ -24,14 +24,17 @@ export const SocketProvider: ISocketProvider = function SocketProvider({ childre
 
    // start socket connection
   useEffect(() => { 
+  
     const newSocket = io(EnvConfig.baseURL, {
       query: {
-        user_Id: auth?.user?.user_id
+        user_id: auth?.user?.user_id,
       },
     })
     setSocket(newSocket);
     return() => {
       newSocket.disconnect();
+      console.log(newSocket)
+      console.log('iamuser', auth?.user?.user_id)
     }
   }, [auth]);
   
