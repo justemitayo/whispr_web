@@ -3,6 +3,7 @@ import { useGetOTP, useVerifyOTP } from '../../domain/Auth/hooks'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
 import './Verification.css'
+import Registration from './Registration';
 
 interface props{
   email: string,
@@ -77,16 +78,22 @@ const Verification = ({email, setStep}: props) => {
           toast.success(data.msg || 'OTP verified successfully!');
           console.log('Verification success:', data);
           setOtp(Array(4).fill(''));
-          // setLoginPop(false); 
-          // setStep(null)
           navigate('/register-user');
+          window.location.reload();
         },
         onError: (error: any) => {
           toast.error(error.message || 'OTP verification failed');
+
         },
       }
     );
   };
+  useEffect(() => {
+    if (verifyOTP.isSuccess) {
+      console.log('✅ Navigating...');
+      navigate('/register-user');
+    }
+  }, [verifyOTP.isSuccess, navigate]);
   const handleResend = () => {
     const pendingUser = JSON.parse(localStorage.getItem('pendingUser') || '{}');
 
@@ -137,6 +144,8 @@ const Verification = ({email, setStep}: props) => {
       >
         {verifyOTP.isPending ? 'Verifying...' : 'Verify OTP'}
       </button>
+
+      
       <p>
         Didn’t get the code?{''}
         <button

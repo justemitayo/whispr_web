@@ -61,7 +61,7 @@ const Registration = () => {
     }
   
     if (!/^\+\d{10,15}$/.test(phone_number)) {
-      toast.error('Phone number must start with 234 and be 11 to 15 digits total.');
+      toast.error('Phone number must start with +234 and be 10 to 15 digits total.');
       errors.push('phone_number');
     }
   
@@ -199,22 +199,22 @@ const Registration = () => {
       </div>
       <div className='register-content'>
         <label>Phone Number:</label>
-        {/* <input
+        <input
           name='phone_number'
           type='tel'
           placeholder='phone Number'
           value={regUser.phone_number}
           onChange={handleInputChange}
           required
-        />  */}
-        <PhoneInput
-          country={'ng'} // default country
-          value={regUser.phone_number}
-          onChange={(value: string) =>
-            setRegUser((prev) => ({ ...prev, phone_number: value }))
-          }
-          inputStyle={{ width: 'max(25vw, 250px)', cursor:'pointer'}}
-                />
+        /> 
+          {/* <PhoneInput
+            country={'ng'}
+            value={regUser.phone_number}
+            onChange={(value: string) =>
+              setRegUser((prev) => ({ ...prev, phone_number: value }))
+            }
+            inputStyle={{ width: 'max(25vw, 250px)', cursor: 'pointer' }}
+          /> */}
       </div>
       <div className='register-content'>
         <label>Email:</label>

@@ -2,7 +2,7 @@ p{
   color: white;
 }
 .messenger{
-  height: calc(100vh - 210px);
+  height: calc(100vh - 160px);
   /* padding: 0rem 2rem; */
   display: flex;
   color: white;
