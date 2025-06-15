@@ -1,9 +1,10 @@
 import React from 'react'
+import './Log.css'
 
 const Log = () => {
   return (
-    <div>
-      <p>Please log in to continue</p>
+    <div className='log'>
+      <p className='long'>Please log in to continue</p>
     </div>
   )
 }
