@@ -3,7 +3,6 @@ import { useGetOTP, useVerifyOTP } from '../../domain/Auth/hooks'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
 import './Verification.css'
-import Registration from './Registration';
 
 interface props{
   email: string,
