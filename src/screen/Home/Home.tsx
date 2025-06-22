@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useAuthStore } from '../../store/auth.store';
 import './Home.css'
 import Log from '../Log/Log';
@@ -9,19 +9,19 @@ import Messenger from '../Messenger/Messenger';
 
 const Home = () => {
 
-  const [showWelcome, setShowWelcome] = useState<boolean>(true);
+  // const [showWelcome, setShowWelcome] = useState<boolean>(true);
 
    const Auth = useAuthStore().auth;
 
-   useEffect(() => {
-    if (Auth) {
-      const timer = setTimeout(() => {
-        setShowWelcome(false);
-      }, 10000); 
+  //  useEffect(() => {
+  //   if (Auth) {
+  //     const timer = setTimeout(() => {
+  //       setShowWelcome(false);
+  //     }, 10000); 
 
-      return () => clearTimeout(timer); 
-    }
-  }, [Auth]);
+  //     return () => clearTimeout(timer); 
+  //   }
+  // }, [Auth]);
 
 
   return (

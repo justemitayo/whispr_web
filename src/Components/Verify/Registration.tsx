@@ -6,7 +6,7 @@ import { saveString } from '../../Configs/Storage';
 import { strings } from '../../Configs/Strings';
 import { useAuthStore } from '../../store/auth.store';
 import { useNavigate } from 'react-router-dom';
-import PhoneInput from 'react-phone-input-2';
+// import PhoneInput from 'react-phone-input-2';
 import picture from '../../assets/images/default_user_dark.jpg'
 
 const Registration = () => {
