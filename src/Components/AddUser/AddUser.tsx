@@ -9,17 +9,19 @@ import { INewChat } from '../../interface/socket';
 import { showNotification } from '../../services/notification';
 import Swal from 'sweetalert2';
 import './AddUser.css'
+import { useNavigate } from 'react-router-dom';
 
 const AddUser = ({
   user,
   currentUser,
-  setAllUser
+  // setAllUser
 }:AddUserProp) => {
   const {chats, addChat} = useChatStore();
   const auth = useAuth().auth;
   const socket =useSocket().socket;
   const queryClient = useQueryClient();
   const createChat = useCreateChat();
+  const navigate = useNavigate();
 
   //if the chat exists
   const  chatExist = chats.some((chat) => chat?.recipient_info?.user_id === user?.user_id)
@@ -58,7 +60,8 @@ const AddUser = ({
                 },
               },
             } as INewChat);
-            setAllUser(false)
+            // setAllUser(false)
+            navigate('/')
             showNotification({
               title: `@${user?.user_name} added!`,
               message: `You can now chat with @${user?.user_name}`,            

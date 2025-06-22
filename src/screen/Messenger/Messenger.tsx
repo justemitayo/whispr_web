@@ -26,6 +26,7 @@ const Messenger: FunctionComponent = () => {
   const [currentChatId, setCurrentChatId] = useState<string | null>(null);
   const [recipientInfo, setRecipientInfo] = useState<IChat['recipient_info'] | null>(null)
   const [currentChat, setCurrentChat] = useState<boolean>(false);
+  const [isSidebar, setIsSidebar] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const socket = useSocket().socket;
   const updateChatMessage = useChatStore().updateChatMessage;
@@ -74,6 +75,18 @@ const Messenger: FunctionComponent = () => {
       container.removeEventListener('scroll', handleScroll);
     };
   }, [isFetching, fetchNextPage, refetch]);
+
+    // Auto-close sidebar on resize if screen is wide
+    useEffect(() => {
+      const handleResize = () => {
+        if (window.innerWidth > 768) {
+          setIsSidebar(false);
+        }
+      };
+  
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
   
 
 
@@ -210,14 +223,19 @@ const Messenger: FunctionComponent = () => {
 
   return (
     <div className='messenger'>
-      <div className='chat-menu'>
+      <div className={`chat-menu ${isSidebar ? 'open' : ''}`}>
         <div className='menu-wrapper'>
-          <input 
-            placeholder='search for friends'
-            className='menu-input'
-            value={searchChat}
-            onChange={(e) => setSearchChat(e.target.value)}
-          />
+          <div className='sidebar'>
+            <input 
+              placeholder='search for friends'
+              className='menu-input'
+              value={searchChat}
+              onChange={(e) => setSearchChat(e.target.value)}
+            />
+            <button className='close-btn' onClick={() => setIsSidebar(false)}>x</button>
+        
+
+
 
           {isPending && users?.length === 0 ? (<p>Loading Chats...</p>) : (
               <div className='menu-top'          
@@ -243,11 +261,12 @@ const Messenger: FunctionComponent = () => {
               }
                 </div>
           )}
-x
+            </div>
         </div> 
       </div>
       <div className='chat-box'>
         <div className='box-wrapper'>
+      <button className={`hamburger-btn ${isSidebar? 'hide' : ''}`} onClick={() => setIsSidebar(true)}>☰</button>
           { currentChat && recipientInfo ?
             <>
               <div className='chat-header'>

@@ -203,7 +203,7 @@ const Registration = () => {
           name='phone_number'
           type='tel'
           placeholder='phone Number'
-          value={regUser.phone_number}
+          value={`+${regUser.phone_number}`}
           onChange={handleInputChange}
           required
         /> 

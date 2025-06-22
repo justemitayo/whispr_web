@@ -6,10 +6,8 @@ import Modal from '../Modals/Modal';
 import Messenger from '../Messenger/Messenger';
 
 
-interface props{
-  setAllUser :  React.Dispatch<React.SetStateAction<boolean>>
-}
-const Home = ({setAllUser}: props) => {
+
+const Home = () => {
 
   const [showWelcome, setShowWelcome] = useState<boolean>(true);
 
@@ -30,12 +28,12 @@ const Home = ({setAllUser}: props) => {
     <div>
       {Auth ? (
         <>
-          {showWelcome && (
+          {/* {showWelcome && (
             <p style={{ border: '1px dashed rgb(174, 76, 23)' }}>
               Welcome back, {Auth.user?.user_name || 'User'}!
             </p>
-          )}
-          <Modal setAllUser={setAllUser}/>
+          )} */}
+          <Modal/>
           <Messenger />
         </>
       ) : (

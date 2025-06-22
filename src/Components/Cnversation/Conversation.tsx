@@ -52,7 +52,7 @@ const Conversation = (
         <div className='conversation-component'>
           <div className='conversation-left'>
             <span>{truncate(recipient_info?.user_name || '', 23)}</span>
-            <span>{messageDate? timeAgo.format(
+            <span className='timer'>{messageDate? timeAgo.format(
               new Date(last_message_info?.at || '').getTime()
             ): ''}</span>
           </div>

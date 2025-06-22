@@ -10,6 +10,7 @@ p{
 .chat-menu{
   flex: 3.5;
   border-right: 2px solid rgb(174, 76, 23);
+  transition: transform 0.3s ease-in-out;
 }
 .menu-input{
   width: 90%;
@@ -79,5 +80,67 @@ p{
   justify-content: center;
   color:rgb(174, 76, 23); 
   cursor: default;
+}
+.hamburger-btn,
+.close-btn {
+  display: none;
+}
+
+
+
+@media (max-width: 768px) {
+
+  .messenger{
+    flex-direction: row;
+  }
+  .chat-menu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 75%;
+    max-width: 20rem;
+    height: 100%;
+    background: black;
+    transform: translateX(-100%);
+    z-index: 1;
+    box-shadow: 2px 0 8px rgba(104, 42, 9, 0.1);
+  }
+  .chat-menu.open {
+    transform: translateX(0);
+  }
+  .sidebar{
+    padding: 1rem;
+    position: relative;
+    height: 100%;
+  }
+  .close-btn {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 1.8rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: white;
+  }
+  .chat-box{
+    flex: 1;
+  }
+  .hamburger-btn {
+    display: block;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    top: 6.3rem;
+    left: 12px;
+    z-index: 1100;
+    color: white;
+  }
+  .hamburger-btn.hide{
+    display: none;
+  }
 }
 
