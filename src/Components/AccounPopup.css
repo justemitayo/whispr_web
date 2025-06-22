@@ -94,9 +94,6 @@
 
 }
 
-@media (max-width: 768px){
-
-}
 
 
 @media (max-width: 480px) {
@@ -115,18 +112,17 @@
     padding: 20px;
     gap: 15px;
     margin: 10px;
-    max-width: calc(100vw - 20px);
     min-height: auto;
   }
 
   .account-input input{
-    width: 430px;
+    width: 340px;
   }
   
 }
 @media (min-width: 481px) and (max-width: 768px) {
   .popup-component {
-      max-width: 400px;
+      max-width: 380px;
       padding: 25px;
   }
 }
