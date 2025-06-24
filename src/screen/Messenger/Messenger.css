@@ -89,7 +89,9 @@ p{
   display: flex;
   align-items: center;
   gap: 1rem;
-  /* justify-content: space-between; */
+  width: 100%;
+  padding: 0rem 1.5rem;
+  justify-content: space-between;
 }
 .chat-header{
   display: flex;

@@ -22,6 +22,11 @@
   align-items: center;
   justify-content: space-between;
 }
+.modal-head{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 .profile{
   position: relative;
   display: inline-block;
@@ -53,12 +58,12 @@
 
 @media (max-width: 768px) {
   .modal{
-    padding: 0rem 3rem 0rem 4rem;
+    padding: 0rem 3rem 0rem 2rem;
   }
   .hamburger-btn{
     display: block;
     font-size: 2rem;
-    position: fixed;
+    /* position: fixed; */
     background: none;
     border: none;
     cursor: pointer;
@@ -75,7 +80,7 @@
 
 @media (max-width: 481px) {
   .modal{
-    padding: 0rem 1rem 0rem 3rem;
+    padding: 0rem 1rem 0rem 1rem;
   }
   .start{
     width: 1.5rem;

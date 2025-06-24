@@ -53,9 +53,9 @@ const Modal = ({isSidebar, setIsSidebar}: props) => {
   };
   return (
     <>
-    <button className={`hamburger-btn ${isSidebar? 'hide' : ''}`} onClick={() => setIsSidebar(true)}>☰</button>
     <div className='modal'>
       <div className='modal-head'>
+        <button className={`hamburger-btn ${isSidebar? 'hide' : ''}`} onClick={() => setIsSidebar(true)}>☰</button>
         <h2>Conversation</h2>
       </div>
       <div className='modal-content'>
