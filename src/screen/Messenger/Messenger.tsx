@@ -257,26 +257,6 @@ const Messenger = ({isSidebar, setIsSidebar}:props) => {
                       {...chat}
                       online={isOnline(chat?.recipient_info?.user_id || '')}
                     />
-                    <Conversation 
-                      {...chat}
-                      online={isOnline(chat?.recipient_info?.user_id || '')}
-                    />
-                    <Conversation 
-                      {...chat}
-                      online={isOnline(chat?.recipient_info?.user_id || '')}
-                    />
-                    <Conversation 
-                      {...chat}
-                      online={isOnline(chat?.recipient_info?.user_id || '')}
-                    />
-                    <Conversation 
-                      {...chat}
-                      online={isOnline(chat?.recipient_info?.user_id || '')}
-                    />
-                    <Conversation 
-                      {...chat}
-                      online={isOnline(chat?.recipient_info?.user_id || '')}
-                    />
                   </div>
                 ))):(
                   <span className='conversation-text' style={{fontSize:"2rem"}}>No Chat Found!</span>

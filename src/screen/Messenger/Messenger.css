@@ -154,6 +154,13 @@ p{
   .close-btn:hover {
     color: red;
   }
+  .box-bottom textarea{
+    height: 20px;
+  }
+  .box-bottom button{
+    width: 60px;
+    height: 20px;
+  }
 
 }
 
