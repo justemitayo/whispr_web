@@ -94,7 +94,7 @@ p{
 .chat-header{
   display: flex;
   align-items: center;
-  height: 5.5rem;
+  height: 3.5rem;
   flex-shrink: 0;
   background-color: rgb(104, 42, 9);
 }

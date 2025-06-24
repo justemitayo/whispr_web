@@ -276,8 +276,8 @@ const Messenger = ({isSidebar, setIsSidebar}:props) => {
                 <div className='chat-header-top'>
                   <span onClick={() => setCurrentChat(false)} style={{marginLeft:'1rem', marginRight:'0.5rem', fontSize:'1.4rem', cursor:'pointer'}}>x</span>
                   <div style={{position:'relative'}}>
-                    <img alt='' src={recipientInfo.profile_picture? recipientInfo.profile_picture: user} style={{width:'3.5rem', height:'3.5rem', borderRadius:"50%"}} />
-                    <Online rightOffset={4} online={isOnline(recipientInfo?.user_id || '')}/>
+                    <img alt='' src={recipientInfo.profile_picture? recipientInfo.profile_picture: user} style={{width:'2.5rem', height:'2.5rem', borderRadius:"50%"}} />
+                    <Online rightOffset={-1} online={isOnline(recipientInfo?.user_id || '')}/>
                   </div>
                   <div style={{display:'flex', flexDirection:"column", width:'contain'}}>
                     <span>{truncate(recipientInfo?.user_name || '', 23)}</span>
