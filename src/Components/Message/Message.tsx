@@ -83,12 +83,12 @@ const Message = ({
     src={is_user? auth?.user?.profile_picture : user } 
     alt='Profile'
     style={{
-      width: 32,
-      height: 32,
+      width: 24,
+      height: 24,
       borderRadius: '50%',
       objectFit: 'cover',
-      marginLeft: is_user ? '12px' : '0',
-      marginRight: is_user ? '0' : '12px',
+      marginLeft: is_user ? '8px' : '0',
+      marginRight: is_user ? '0' : '8px',
     }}
   />
 
@@ -105,7 +105,7 @@ const Message = ({
   >
     <div
       style={{
-        minHeight: '50px',
+        minHeight: '40px',
         padding: '10px',
         paddingBottom: is_user ? '6px' : '10px',
         borderRadius: '12px',
@@ -161,7 +161,7 @@ const Message = ({
       <p
         style={{
           marginLeft: is_user ? undefined : 'auto',
-          fontSize: '13px',
+          fontSize: '10px',
           color: '#999',
           marginTop: '4px',
         }}

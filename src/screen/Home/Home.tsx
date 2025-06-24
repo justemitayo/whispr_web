@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuthStore } from '../../store/auth.store';
 import './Home.css'
 import Log from '../Log/Log';
@@ -8,6 +8,7 @@ import Messenger from '../Messenger/Messenger';
 
 
 const Home = () => {
+  const [isSidebar, setIsSidebar] = useState(false)
 
   // const [showWelcome, setShowWelcome] = useState<boolean>(true);
 
@@ -33,8 +34,8 @@ const Home = () => {
               Welcome back, {Auth.user?.user_name || 'User'}!
             </p>
           )} */}
-          <Modal/>
-          <Messenger />
+          <Modal isSidebar={isSidebar} setIsSidebar={setIsSidebar}/>
+          <Messenger isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
         </>
       ) : (
         <Log />

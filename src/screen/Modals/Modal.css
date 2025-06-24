@@ -6,6 +6,16 @@
   justify-content: space-between;
   border-bottom: 1px solid rgb(174, 76, 23);
 }
+.start{
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.stop{
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
 .modal-content{
   width: max(10vw, 100px);
   display: flex;
@@ -34,4 +44,56 @@
 .logout-confirm button {
   margin-right: 1rem;
   padding: 0.25rem 0.5rem;
+}
+.hamburger-btn{
+  display: none;
+}
+
+
+
+@media (max-width: 768px) {
+  .modal{
+    padding: 0rem 3rem 0rem 4rem;
+  }
+  .hamburger-btn{
+    display: block;
+    font-size: 2rem;
+    position: fixed;
+    background: none;
+    border: none;
+    cursor: pointer;
+    top: 3.6rem;
+    left: 1rem;
+    z-index: 1000;
+    color: white;
+  }
+  .hamburger-btn.hide{
+    display: none;
+  }
+}
+
+
+@media (max-width: 481px) {
+  .modal{
+    padding: 0rem 1rem 0rem 3rem;
+  }
+  .start{
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .stop{
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .modal-content{
+    width: 4rem;
+  }
+  .modal h2{
+    font-size: 1.2rem;
+  }
+  .hamburger-btn{
+    font-size: 1.3rem;
+    top: 3.7rem;
+    left: 4px;
+  }
 }

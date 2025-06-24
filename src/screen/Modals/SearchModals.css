@@ -2,20 +2,24 @@
   background-color: black;
   display: flex;
   align-items: center;
+  overflow:hidden;
+  width: 100%;
+  height: 100vh;
   justify-content: center;
 
 }
 .searchmodal-content{
   place-self: center;
-  width: max(20vw, 900px);
-  
-  /* height: max(20vw, 900px); */
+  width: max(20vw, 900px);  
   /* height: 100%; */
   color: #80808080;
+  height: 80vh;
+  overflow-y: auto;
   /* background-color: rgb(93, 37, 7); */
   display: flex;
+  
   flex-direction: column;
-  gap: 25px;
+  gap: 2rem;
   padding: 4rem;
   border-radius: 8px;
   font-size: 14px;
@@ -54,8 +58,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   padding: 0;
   margin: 0;
 } 
@@ -64,8 +67,12 @@
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
-  /* height: 6rem; */
   /* background-color: yellow; */
+}
+.userdata-content{
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 .search-button{
   border: none;
@@ -94,4 +101,40 @@
 .userp{
   font-size: 1rem;
   /* background-color: rebeccapurple; */
+}
+.userdata-img{
+  width: 5rem; 
+  height: 5rem;
+ border-radius: 50%;
+}
+
+@media (max-width: 786px) {
+  .searchmodal-head input{
+    height: 2rem;
+  }
+  .searchmodal-head p{
+    height: 2rem;
+    place-self: center;
+  }
+  .user{
+    font-size: 1rem;
+  }
+  .userp{
+    font-size: 0.7rem;
+  }
+  .userdata-img{
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+@media (max-width: 511px) {
+  .searchmodal-head input{
+    width: 60%;
+  }
+  .search-button{
+    width: 130px;
+    font-size: 10px;
+    height: 2rem;
+    place-content: center;
+  }
 }

@@ -5,10 +5,15 @@
 }
 .log{
   width: 100%;
-  height: 88.5vh;
+  height: 89vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background-image: url('../../assets/images/images.jpeg');
   /* background-size: cover; */
+}
+@media (max-width: 768px) {
+  .log{
+    height: 95vh;
+  }
 }

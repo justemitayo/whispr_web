@@ -76,4 +76,17 @@
   font-size: 11px;
 }
 
+@media (max-width: 481px) {
+  .conversation{
+    padding: 3px;
+    margin-top: 0.6rem;
+  }
+  .timer{
+    font-size: 8px;
+  }
+  .user-pic{
+    font-size: 0.8rem;
+  }
+}
+
 

@@ -13,7 +13,12 @@ import { useChatStore } from '../../store/chat.store';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
-const Modal = () => {
+
+interface props {
+  isSidebar: boolean
+  setIsSidebar: React.Dispatch<React.SetStateAction<boolean>>
+}
+const Modal = ({isSidebar, setIsSidebar}: props) => {
   
 
   const auth = useAuth().auth;
@@ -47,14 +52,18 @@ const Modal = () => {
     }
   };
   return (
+    <>
+    <button className={`hamburger-btn ${isSidebar? 'hide' : ''}`} onClick={() => setIsSidebar(true)}>☰</button>
     <div className='modal'>
-      <h2>Conversation</h2>
+      <div className='modal-head'>
+        <h2>Conversation</h2>
+      </div>
       <div className='modal-content'>
-          <img alt='' src={SearchModal} style={{width:'2.5rem', height:'2.5rem'}} onClick={() => navigate('/search')}/>
+          <img alt='' className= 'start' src={SearchModal} onClick={() => navigate('/search')}/>
           <div className='profile'>
             <div style={{position:'relative'}}>
               <img alt='profilepicture' src={auth?.user?.profile_picture ? auth?.user?.profile_picture : darkProfile} onClick={confirmLogout} 
-              style={{width:'2.5rem', height:'2.5rem', borderRadius:'50%', cursor:"pointer"}}
+               className='stop'
               />
               <Online rightOffset={-4} online={isOnline(auth?.user?.user_id || '')}/>
             </div>
@@ -62,6 +71,7 @@ const Modal = () => {
       </div>
       </div>
     </div>
+    </>
   )
 }
 

@@ -86,13 +86,6 @@
   cursor: pointer;
 }
 
-@media (max-width: 768px) and (orientation: landscape) {
-  .popup-component {
-      max-height: 85vh;
-      overflow-y: auto;
-  }
-
-}
 
 
 
@@ -115,14 +108,11 @@
     min-height: auto;
   }
 
-  .account-input input{
-    width: 340px;
-  }
   
 }
-@media (min-width: 481px) and (max-width: 768px) {
+@media (max-width: 768px) {
   .popup-component {
-      max-width: 380px;
+      width: 290px;
       padding: 25px;
   }
 }
@@ -134,7 +124,7 @@
   
   .account-input input {
       height: 44px;
-      width: 6rem;
+      /* width: 6rem; */
       padding: 10px 12px;
   }
   

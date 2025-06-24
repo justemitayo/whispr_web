@@ -58,16 +58,17 @@ const SeachModals = () => {
                     <div  key={user?.user_id} className='userdata'>
                       <div className='userdata-component'>
                         <div className='user-data'>
-                          <img alt='' src={user?.profile_picture}  className='userdata-img'  style={{ width: '5rem', height: '5rem', borderRadius: '50%' }}/>
+                          <img alt='' src={user?.profile_picture}  className='userdata-img' />
                           <Online 
                             online={isOnline(user?.user_id || '')}
+                              rightOffset={-3}
                           />
                           
                         </div>
-                        <div className='userdata-content' style={{gap:'0'}}>
-                          <p className='user'>{user?.full_name || ''}</p>
-                          <p className='userp'>@{user?.user_name || ''}</p>
-                          <p className='userp' style={{fontStyle:"italic"}}>{user?.bio}</p>
+                        <div className='userdata-content'>
+                          <span className='user'>{user?.full_name || ''}</span>
+                          <span className='userp'>@{user?.user_name || ''}</span>
+                          <span className='userp' style={{fontStyle:"italic"}}>{user?.bio}</span>
                         </div>
                       </div>
                       <AddUser

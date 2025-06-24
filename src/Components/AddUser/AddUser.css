@@ -8,3 +8,9 @@
 .addUser:hover {
   color: rgb(183, 183, 244);
 }
+
+@media (max-width: 786px) {
+  .addUser{
+    font-size: 1rem;
+  }
+}

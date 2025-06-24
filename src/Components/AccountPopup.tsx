@@ -167,7 +167,7 @@ const AccountPopup = ({setLoginPop}:props) => {
                   onChange={(value: string) =>
                     setReg((prev) => ({ ...prev, phone_number: value }))
                   }
-                  inputStyle={{ width: '90%' }}
+                  inputStyle={{ width: '100%' }}
                 />
               </div>
         }

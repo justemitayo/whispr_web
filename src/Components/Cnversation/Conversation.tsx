@@ -51,13 +51,13 @@ const Conversation = (
       </div>
         <div className='conversation-component'>
           <div className='conversation-left'>
-            <span>{truncate(recipient_info?.user_name || '', 23)}</span>
+            <span className='user-pic'>{truncate(recipient_info?.user_name || '', 23)}</span>
             <span className='timer'>{messageDate? timeAgo.format(
               new Date(last_message_info?.at || '').getTime()
             ): ''}</span>
           </div>
           <div className='conversation-bottom'>
-            <p style={{color:'gray', fontSize:'0.9rem'}}>
+            <p style={{color:'gray', fontSize:'0.7rem'}}>
               {
               // truncate(last_message_info?.data || '', 40)
               deciphered_text

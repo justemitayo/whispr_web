@@ -1,4 +1,4 @@
-import  { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react'
+import  {  useEffect, useMemo, useRef, useState } from 'react'
 import './Messenger.css'
 import Conversation from '../../Components/Cnversation/Conversation'
 import Message from '../../Components/Message/Message'
@@ -17,16 +17,18 @@ import { truncate } from '../../slice/truncate';
 import { MessageCipher } from '../../libs/Bytelock'
 import { useGetUserChats } from '../../domain/Chat/hooks'
 
+interface props {
+  isSidebar: boolean
+  setIsSidebar: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-
-const Messenger: FunctionComponent = () => {
+const Messenger = ({isSidebar, setIsSidebar}:props) => {
 
   // this is for conversation
 
   const [currentChatId, setCurrentChatId] = useState<string | null>(null);
   const [recipientInfo, setRecipientInfo] = useState<IChat['recipient_info'] | null>(null)
   const [currentChat, setCurrentChat] = useState<boolean>(false);
-  const [isSidebar, setIsSidebar] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const socket = useSocket().socket;
   const updateChatMessage = useChatStore().updateChatMessage;
@@ -86,7 +88,7 @@ const Messenger: FunctionComponent = () => {
   
       window.addEventListener('resize', handleResize);
       return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    }, [setIsSidebar]);
   
 
 
@@ -247,9 +249,30 @@ const Messenger: FunctionComponent = () => {
                       onClick={() => {
                         setCurrentChatId(chat.chat_id ?? '');
                         setRecipientInfo(chat.recipient_info);
-                        setCurrentChat(true)
+                        setCurrentChat(true);
+                        setIsSidebar(false)
                       }}
                     >
+                    <Conversation 
+                      {...chat}
+                      online={isOnline(chat?.recipient_info?.user_id || '')}
+                    />
+                    <Conversation 
+                      {...chat}
+                      online={isOnline(chat?.recipient_info?.user_id || '')}
+                    />
+                    <Conversation 
+                      {...chat}
+                      online={isOnline(chat?.recipient_info?.user_id || '')}
+                    />
+                    <Conversation 
+                      {...chat}
+                      online={isOnline(chat?.recipient_info?.user_id || '')}
+                    />
+                    <Conversation 
+                      {...chat}
+                      online={isOnline(chat?.recipient_info?.user_id || '')}
+                    />
                     <Conversation 
                       {...chat}
                       online={isOnline(chat?.recipient_info?.user_id || '')}
@@ -265,13 +288,13 @@ const Messenger: FunctionComponent = () => {
         </div> 
       </div>
       <div className='chat-box'>
-        <div className='box-wrapper'>
-      <button className={`hamburger-btn ${isSidebar? 'hide' : ''}`} onClick={() => setIsSidebar(true)}>☰</button>
+        {/* <div className='box-wrapper'> */}
+
           { currentChat && recipientInfo ?
             <>
               <div className='chat-header'>
                 <div className='chat-header-top'>
-                <span onClick={() => setCurrentChat(false)} style={{marginLeft:'1rem', marginRight:'0.5rem', fontSize:'1.4rem', cursor:'pointer'}}>x</span>
+                  <span onClick={() => setCurrentChat(false)} style={{marginLeft:'1rem', marginRight:'0.5rem', fontSize:'1.4rem', cursor:'pointer'}}>x</span>
                   <div style={{position:'relative'}}>
                     <img alt='' src={recipientInfo.profile_picture? recipientInfo.profile_picture: user} style={{width:'3.5rem', height:'3.5rem', borderRadius:"50%"}} />
                     <Online rightOffset={4} online={isOnline(recipientInfo?.user_id || '')}/>
@@ -326,7 +349,7 @@ const Messenger: FunctionComponent = () => {
             : <span className='conversation-text'>Open a Conversation to Start a Chat.</span>
           }
         </div>
-      </div>
+      {/* </div> */}
     </div>
   )
 }
