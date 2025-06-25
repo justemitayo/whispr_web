@@ -4,6 +4,7 @@ import './SearchModals.css'
 import { Online } from '../../Components/Online/Online'
 import AddUser from '../../Components/AddUser/AddUser'
 import { useAuth } from '../../contexts/Auth/interface'
+import defaults from '../../assets/images/default_user_dark.jpg'
 import { useOnlineStore } from '../../store/online.store'
 import { useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
@@ -58,7 +59,7 @@ const SeachModals = () => {
                     <div  key={user?.user_id} className='userdata'>
                       <div className='userdata-component'>
                         <div className='user-data'>
-                          <img alt='' src={user?.profile_picture}  className='userdata-img' />
+                          <img alt='' src={user?.profile_picture? user?.profile_picture : defaults}  className='userdata-img' />
                           <Online 
                             online={isOnline(user?.user_id || '')}
                               rightOffset={-3}

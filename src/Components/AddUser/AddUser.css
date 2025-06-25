@@ -8,6 +8,10 @@
 .addUser:hover {
   color: rgb(183, 183, 244);
 }
+.addUser:disabled {
+  color: gray;
+  cursor: not-allowed;
+}
 
 @media (max-width: 786px) {
   .addUser{
