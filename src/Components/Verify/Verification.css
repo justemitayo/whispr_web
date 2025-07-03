@@ -48,3 +48,9 @@
   color: white;
   font-size: 1.3rem;
 }
+@media (max-width: 481px) {
+  .verify input{
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
