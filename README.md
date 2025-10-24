@@ -1,45 +1,55 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# 🗣️ Whisper — Real-Time Encrypted Chat App
 
-In the project directory, you can run:
+Whisper is a modern, real-time chat application built with **React**, featuring **secure message encryption**, **WebSocket-powered live messaging**, and a **clean, responsive UI** inspired by platforms like ChatGPT and Messenger.  
 
-### `yarn start`
+Deployed on **Netlify**, Whisper allows users to connect instantly and communicate privately with **end-to-end encryption** via [ByteLock](https://www.npmjs.com/package/bytlock).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 🚀 Features
 
-### `yarn test`
+- 🔒 **End-to-End Encryption** using `MessageCipher` (ByteLock)
+- 💬 **Real-Time Messaging** via WebSocket
+- 👥 **1-on-1 Conversations** with route-based navigation (`/message/:chat_id`)
+- ⚡ **Infinite Scrolling** for chat history using React Query
+- 🧭 **Online Status & Typing Indicators**
+- 📲 **Responsive Design** (mobile & desktop)
+- 🧠 **Zustand State Management**
+- 🔁 **Optimistic UI Updates** for smoother interactions
+- 🧑‍💻 **Authentication** (login, signup, session persistence)
+- 🌙 **Dark/Light Mode Support**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `yarn build`
+## 🛠️ Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Category | Technology |
+|-----------|-------------|
+| Frontend Framework | React |
+| State Management | Zustand |
+| Data Fetching | TanStack Query (React Query) |
+| Encryption | ByteLock (`MessageCipher`) |
+| Real-Time Updates | WebSocket |
+| Styling | Tailwind CSS |
+| Deployment | Netlify |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+src/
+│
+├── components/        # UI components (chat list, message box, etc.)
+├── pages/             # App pages and route structure
+├── store/             # Zustand stores (auth, chat, socket)
+├── hooks/             # Custom hooks (dark mode, socket, encryption)
+├── utils/             # Utility functions (encryption, formatters)
+├── assets/            # Icons and images
+└── App.tsx            # Root component
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
