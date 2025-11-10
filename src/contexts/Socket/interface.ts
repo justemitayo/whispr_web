@@ -11,7 +11,7 @@ import { Socket } from 'socket.io-client';
 export type ISocketProvider = React.FC<{
   children: ReactNode;
 }>;
-
+ 
 export type ISocketContext = {
   socket: Socket | null;
   setSocket: Dispatch<SetStateAction<Socket | null>>;
@@ -24,7 +24,7 @@ export function useSocket(): ISocketContext {
 
   useEffect(function onDidMount() {
     if (!context) {
-      console.error('useAuth must have AuthProvider as parent.');
+      console.error('useSocket must have SocketProvider as parent.');
     }
   });
 
